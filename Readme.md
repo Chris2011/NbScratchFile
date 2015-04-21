@@ -1,0 +1,2 @@
+#Scratch Files for Netbeans
+###With this plugin you can create scratch files which will created in memory. You don't need a project for this. After typing Ctrl + Alt + Shift + N you can select File -> Save as... to save the file to any location wherever you want.
