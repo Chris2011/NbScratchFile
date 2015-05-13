@@ -1,4 +1,4 @@
-package org.chrisle.netbeans.modules.scratchfile;
+package org.chrisle.netbeans.plugins.nbscratchfile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
