@@ -20,11 +20,11 @@ import org.openide.util.NbBundle.Messages;
 
 @ActionID(
     category = "Tools",
-    id = "org.chrisle.netbeans.modules.scratchfile.CreateScratchFile"
+    id = "org.chrisle.netbeans.plugins.nbscratchfile.CreateScratchFile"
 )
 @ActionRegistration(
     displayName = "#CTL_CreateScratchFile",
-    iconBase = "org/chrisle/netbeans/modules/scratchfile/resources/add_file.png"
+    iconBase = "org/chrisle/netbeans/plugins/nbscratchfile/resources/add_file.png"
 )
 @ActionReferences({
     @ActionReference(path = "Menu/File", position = 150),
