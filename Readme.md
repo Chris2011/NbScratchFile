@@ -6,4 +6,8 @@ It is not full functional but you can create new in memory files with Ctrl + Alt
 
 I found this little example, which I implemented: <a href="http://blogs.kiyut.com/tonny/2007/09/01/netbeans-platform-and-memory-file-system/">Netbeans platform and memory file system</a>
 
-Next part is to implement the response from <a href="http://www.kiyut.com/">Tonny Kohar</a> to save this file the first time with a location popup, after
+~~Next part is to implement the response from <a href="http://www.kiyut.com/">Tonny Kohar</a> to save this file the first time with a location popup, after~~
+Unfortunately it is not possible to have 2 different functionalities for the 
+normal save logic. So that means, that you have to add a shortcut to Save As 
+for me Ctrl + Alt + S; Ctrl + Alt + S and then you can save the file whereever 
+you want and change the name and extension.

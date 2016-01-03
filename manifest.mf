@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 AutoUpdate-Show-In-Client: true
-OpenIDE-Module: org.chrisle.netbeans.modules.scratchfile
-OpenIDE-Module-Localizing-Bundle: org/chrisle/netbeans/modules/scratchfile/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
+OpenIDE-Module: org.chrisle.netbeans.plugins.nbscratchfile
+OpenIDE-Module-Localizing-Bundle: org/chrisle/netbeans/plugins/nbscratchfile/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.2
 
