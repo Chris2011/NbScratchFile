@@ -58,7 +58,7 @@ public final class CreateScratchFile implements ActionListener {
         FileObject root = memFS.getRoot();
 
         DataFolder dataFolder = DataFolder.findFolder(root);
-        DataObject gdo = template.createFromTemplate(dataFolder, "New" + getNextCount());
+        DataObject gdo = template.createFromTemplate(dataFolder, "untitled" + getNextCount());
 
         return gdo;
     }
