@@ -3,7 +3,11 @@ package org.chrisle.netbeans.plugins.nbscratchfile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
+import javax.swing.JOptionPane;
+import org.chrisle.netbeans.plugins.nbscratchfile.components.scratchfilecomponent.ScratchFileTopComponent;
 import org.netbeans.api.actions.Openable;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -36,30 +40,55 @@ public final class CreateScratchFile implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            DataObject gdo = getDataObject();
-            Openable openable = gdo.getLookup().lookup(Openable.class);
+//        FileTypeWindow fileTypeWindow = new FileTypeWindow();
+//        
+//        FileTypeWindowCntrl.open();
+        // TODO: Can't add the editorKit with the mimeType properly.
+        ScratchFileTopComponent scratchFileTopComponent = new ScratchFileTopComponent();
 
-            openable.open();
-        } catch (DataObjectNotFoundException ex) {
-            Exceptions.printStackTrace(ex);
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        scratchFileTopComponent.open();
+        scratchFileTopComponent.requestActive();
+
+        scratchFileTopComponent.setMimeType("text/x-java");
+        
+//        try {
+//            DataObject gdo = getDataObject();
+//            Openable openable = gdo.getLookup().lookup(Openable.class);
+//
+//            openable.open();
+//        } catch (DataObjectNotFoundException ex) {
+//            Exceptions.printStackTrace(ex);
+//        } catch (IOException ex) {
+//            Exceptions.printStackTrace(ex);
+//        }
     }
 
     protected DataObject getDataObject() throws DataObjectNotFoundException, IOException {
         String templateName = getTemplate();
 
         FileObject fo = FileUtil.getConfigRoot().getFileObject(templateName);
+        Enumeration<String> attributes = fo.getAttributes();
+        String test = "";
+        
+//        for (String attribute : attributes) {
+//            test += "\n" + attribute;
+//        }
+        
+//        while (attributes.hasMoreElements()) {
+//            test += "\n" + attributes.nextElement();
+//        }
+//        
+//        JOptionPane.showMessageDialog(null, test);
+        
+        fo.setAttribute("mimeType", "text/javascript");
         DataObject template = DataObject.find(fo);
-
+        
         FileSystem memFS = FileUtil.createMemoryFileSystem();
         FileObject root = memFS.getRoot();
-
+        
         DataFolder dataFolder = DataFolder.findFolder(root);
         DataObject gdo = template.createFromTemplate(dataFolder, "untitled" + getNextCount());
-
+        
         return gdo;
     }
 
