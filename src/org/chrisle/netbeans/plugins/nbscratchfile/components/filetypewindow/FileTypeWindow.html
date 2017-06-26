@@ -1,6 +1,8 @@
+<!DOCTYPE html>
+
 <html>
     <head>
-        <title>FileTypeWindow</title>
+        <title>Languages</title>
         <meta charset="UTF-8">
 
         <link href="style.css" rel="stylesheet" />
@@ -8,7 +10,12 @@
     <body>
         <!-- UI of the main window -->
         <div id="window">
-            <input data-bind="value: text" />
+            <input data-bind="value: language" placeholder="Search available languages..." />
         </div>
+        <ul data-bind="foreach: languageTypes">
+            <li>
+                <span data-bind="text: languageName"></span>
+            </li>
+        </ul>
     </body>
 </html>
