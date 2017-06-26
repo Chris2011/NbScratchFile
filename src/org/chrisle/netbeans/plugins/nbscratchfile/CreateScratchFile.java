@@ -4,11 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.swing.JOptionPane;
+import org.chrisle.netbeans.plugins.nbscratchfile.components.filetypewindow.FileTypeWindow;
 import org.chrisle.netbeans.plugins.nbscratchfile.components.scratchfilecomponent.ScratchFileTopComponent;
-import org.netbeans.api.actions.Openable;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
@@ -19,7 +17,6 @@ import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataFolder;
 import org.openide.loaders.DataObject;
 import org.openide.loaders.DataObjectNotFoundException;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 
 @ActionID(
@@ -40,9 +37,7 @@ public final class CreateScratchFile implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-//        FileTypeWindow fileTypeWindow = new FileTypeWindow();
-//        
-//        FileTypeWindowCntrl.open();
+        FileTypeWindow.open();
         // TODO: Can't add the editorKit with the mimeType properly.
         ScratchFileTopComponent scratchFileTopComponent = new ScratchFileTopComponent();
 
