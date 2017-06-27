@@ -11,7 +11,7 @@ import net.java.html.json.Property;
     @Property(name = "icon", type = String.class),
     @Property(name = "languageName", type = String.class),
     @Property(name = "fileExt", type = String.class),
-    @Property(name = "pluginNeeded", type = boolean.class),
+    @Property(name = "isPluginNeeded", type = boolean.class),
 })
 public class LanguageDataModel {
 }

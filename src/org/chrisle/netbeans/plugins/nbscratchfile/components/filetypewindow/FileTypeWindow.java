@@ -63,19 +63,20 @@ public final class FileTypeWindow extends JFrame {
 
         languageViewModel.setLanguageName("JavaScript");
         languageViewModel.setFileExt("js");
-        languageViewModel.setPluginNeeded(false);
+        languageViewModel.setIsPluginNeeded(false);
         languages.add(languageViewModel);
 
         languageViewModel.setLanguageName("JSX");
         languageViewModel.setFileExt("jsx");
-        languageViewModel.setPluginNeeded(false);
+        languageViewModel.setIsPluginNeeded(false);
         languages.add(languageViewModel);
 
         languageViewModel.setLanguageName("HTML");
         languageViewModel.setFileExt("html");
-        languageViewModel.setPluginNeeded(false);
+        languageViewModel.setIsPluginNeeded(false);
         languages.add(languageViewModel);
 
         fileTypeWindowViewModel.applyBindings();
+//        Models.applyBindings(languageViewModel);
     }
 }
