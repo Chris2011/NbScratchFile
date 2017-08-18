@@ -3,7 +3,6 @@ package org.chrisle.netbeans.plugins.nbscratchfile;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
@@ -11,19 +10,15 @@ import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import netscape.javascript.JSObject;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 
 @ActionID(
@@ -84,16 +79,5 @@ public final class CreateScratchFile implements ActionListener {
 
         dialog.setLocationByPlatform(true);
         dialog.setVisible(true);
-
-//        try {
-//            DataObject gdo = getDataObject();
-//            Openable openable = gdo.getLookup().lookup(Openable.class);
-//
-//            openable.open();
-//        } catch (DataObjectNotFoundException ex) {
-//            Exceptions.printStackTrace(ex);
-//        } catch (IOException ex) {
-//            Exceptions.printStackTrace(ex);
-//        }
     }
 }
