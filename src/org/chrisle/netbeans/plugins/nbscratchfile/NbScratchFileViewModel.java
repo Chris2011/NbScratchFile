@@ -21,9 +21,9 @@ public class NbScratchFileViewModel {
         this.dialog = dialog;
     }
 
-    public void setExt(String ext) {
+    public void setExt(String ext, String languageName) {
         try {
-            Path path = Paths.get(String.format("/tmp/foo/scratch%d.%s", this.counter++, ext));
+            Path path = Paths.get(String.format("%s/.netbeans/scratches/%s/scratch%d.%s", System.getProperty("user.home"), languageName, this.counter++, ext));
             Files.createDirectories(path.getParent());
             Files.createFile(path);
 
@@ -34,7 +34,7 @@ public class NbScratchFileViewModel {
             dialog.setVisible(false);
             openable.open();
         } catch (FileAlreadyExistsException e) {
-            this.setExt(ext);
+            this.setExt(ext, languageName);
             System.err.println("already exists: " + e.getMessage());
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
