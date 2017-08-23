@@ -7,10 +7,11 @@
 
         <link href="main.css" rel="stylesheet" />
         <link href="sprite.css" rel="stylesheet" />
-        <!--<script src="http://getfirebug.com/releases/lite/1.4/firebug-lite-debug.js"></script>-->
     </head>
     <body>
-        <input id="languageSearch" data-bind="value: language, valueUpdate: 'keyup', hasFocus: true" type="text" placeholder="Search available languages..." />
+        <div class="wrapper">
+            <input id="languageSearch" data-bind="value: language, valueUpdate: 'keyup', hasFocus: true" type="text" placeholder="Search available languages..." />
+        </div>
 
         <ul id="languageTypes" data-bind="foreach: languageTypes">
             <li data-bind="click: setExt">
