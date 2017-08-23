@@ -1,5 +1,7 @@
 package org.chrisle.netbeans.plugins.nbscratchfile;
 
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -36,7 +38,6 @@ import org.openide.util.NbBundle.Messages;
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
-
     private final JDialog dialog;
     private final JFXPanel jfxPanel;
     private WebView webView;
@@ -52,6 +53,7 @@ public final class CreateScratchFile implements ActionListener {
         dialog.setSize(700, 680);
         dialog.setResizable(false);
         dialog.setAlwaysOnTop(true);
+        dialog.setUndecorated(true);
 
         dialog.getRootPane().registerKeyboardAction((ActionEvent e1) -> {
             dialog.setVisible(false);
@@ -77,7 +79,21 @@ public final class CreateScratchFile implements ActionListener {
 
         });
 
-        dialog.setLocationByPlatform(true);
+        showDialog();
+    }
+
+    public void showDialog() {
+        // try to use monitor, where the input focus is
+        // therefor get the topmost component based on the input focus
+        Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+
+        if (null != focusOwner) {
+            while (focusOwner.getParent() != null) {
+                focusOwner = focusOwner.getParent();
+            }
+        }
+
+        dialog.setLocationRelativeTo(focusOwner);
         dialog.setVisible(true);
     }
 }
