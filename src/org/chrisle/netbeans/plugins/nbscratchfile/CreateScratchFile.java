@@ -50,7 +50,7 @@ public final class CreateScratchFile implements ActionListener {
         this.viewModel = new NbScratchFileViewModel(dialog);
 
         dialog.add(jfxPanel);
-        dialog.setSize(700, 680);
+        dialog.setSize(700, 450);
         dialog.setResizable(false);
         dialog.setAlwaysOnTop(true);
         dialog.setUndecorated(true);
