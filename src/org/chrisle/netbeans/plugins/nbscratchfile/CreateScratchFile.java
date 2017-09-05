@@ -14,7 +14,6 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 import netscape.javascript.JSObject;
 import org.openide.awt.ActionID;
@@ -63,7 +62,6 @@ public final class CreateScratchFile implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Platform.runLater(() -> {
-            dialog.add(new JLabel("Loading..."));
             webView = new WebView();
             jfxPanel.setScene(new Scene(webView));
             webEngine = webView.getEngine();
@@ -75,8 +73,7 @@ public final class CreateScratchFile implements ActionListener {
                 }
             });
 
-            webEngine.load("file:///C:/Projekte/Netbeans%20Plugins/NbScratchFile/src/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/UI/index.html");
-
+            webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/uiI/index.html").toExternalForm());
         });
 
         showDialog();
