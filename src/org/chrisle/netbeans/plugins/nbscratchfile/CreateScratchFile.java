@@ -1,21 +1,25 @@
 package org.chrisle.netbeans.plugins.nbscratchfile;
 
+import java.awt.Component;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
-import org.netbeans.api.actions.Openable;
+import java.awt.event.KeyEvent;
+import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker.State;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.Scene;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javax.swing.JComponent;
+import javax.swing.JDialog;
+import javax.swing.KeyStroke;
+import netscape.javascript.JSObject;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
-import org.openide.filesystems.FileObject;
-import org.openide.filesystems.FileSystem;
-import org.openide.filesystems.FileUtil;
-import org.openide.loaders.DataFolder;
-import org.openide.loaders.DataObject;
-import org.openide.loaders.DataObjectNotFoundException;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 
 @ActionID(
@@ -27,47 +31,66 @@ import org.openide.util.NbBundle.Messages;
         iconBase = "org/chrisle/netbeans/plugins/nbscratchfile/resources/add_file.png"
 )
 @ActionReferences({
-    @ActionReference(path = "Menu/File", position = 150),
+    @ActionReference(path = "Menu/File", position = 150)
+    ,
     @ActionReference(path = "Shortcuts", name = "DOS-N")
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
-    private static final AtomicInteger _atomInt = new AtomicInteger(0);
+    private final JDialog dialog;
+    private final JFXPanel jfxPanel;
+    private WebView webView;
+    private WebEngine webEngine;
+    private final NbScratchFileViewModel viewModel;
+
+    public CreateScratchFile() {
+        dialog = new JDialog();
+        jfxPanel = new JFXPanel();
+        this.viewModel = new NbScratchFileViewModel(dialog);
+
+        dialog.add(jfxPanel);
+        dialog.setSize(700, 450);
+        dialog.setResizable(false);
+        dialog.setAlwaysOnTop(true);
+        dialog.setUndecorated(true);
+
+        dialog.getRootPane().registerKeyboardAction((ActionEvent e1) -> {
+            dialog.setVisible(false);
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            DataObject gdo = getDataObject();
-            Openable openable = gdo.getLookup().lookup(Openable.class);
+        Platform.runLater(() -> {
+            webView = new WebView();
+            jfxPanel.setScene(new Scene(webView));
+            webEngine = webView.getEngine();
 
-            openable.open();
-        } catch (DataObjectNotFoundException ex) {
-            Exceptions.printStackTrace(ex);
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
+            webEngine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends State> ov, State oldState, State newState) -> {
+                if (newState == State.SUCCEEDED) {
+                    JSObject win = (JSObject) webView.getEngine().executeScript("window");
+                    win.setMember("NbScratchFileViewModel", this.viewModel);
+                }
+            });
+
+            webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/uiI/index.html").toExternalForm());
+        });
+
+        showDialog();
+    }
+
+    public void showDialog() {
+        // try to use monitor, where the input focus is
+        // therefor get the topmost component based on the input focus
+        Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
+
+        if (null != focusOwner) {
+            while (focusOwner.getParent() != null) {
+                focusOwner = focusOwner.getParent();
+            }
         }
-    }
 
-    protected DataObject getDataObject() throws DataObjectNotFoundException, IOException {
-        String templateName = getTemplate();
-
-        FileObject fo = FileUtil.getConfigRoot().getFileObject(templateName);
-        DataObject template = DataObject.find(fo);
-
-        FileSystem memFS = FileUtil.createMemoryFileSystem();
-        FileObject root = memFS.getRoot();
-
-        DataFolder dataFolder = DataFolder.findFolder(root);
-        DataObject gdo = template.createFromTemplate(dataFolder, "New" + getNextCount());
-
-        return gdo;
-    }
-
-    protected String getTemplate() {
-        return "Templates/Other/file";
-    }
-
-    private static int getNextCount() {
-        return _atomInt.incrementAndGet();
+        dialog.setLocationRelativeTo(focusOwner);
+        dialog.setVisible(true);
     }
 }
