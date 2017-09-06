@@ -7,6 +7,7 @@
 
         <link href="main.css" rel="stylesheet" />
         <link href="sprite.css" rel="stylesheet" />
+        <!--<script src="http://getfirebug.com/releases/lite/1.4/firebug-lite-debug.js"></script>-->
     </head>
     <body>
         <div class="wrapper">
@@ -17,7 +18,8 @@
             <li data-bind="click: setExt">
                 <div class="icon" data-bind="css: `svg-${Icon}`"></div>
                 <div data-bind="text: LanguageName"></div>
-                <div class="file-ext" data-bind="text: FileExt && `(.${FileExt})`"></div>
+                <div class="small-text" data-bind="text: FileExt && `(.${FileExt})`"></div>
+                <div class="small-text" data-bind="text: showPluginRequiredMessage()"></div>
             </li>
         </ul>
 

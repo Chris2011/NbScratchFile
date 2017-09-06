@@ -20,6 +20,7 @@ import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
 
 @ActionID(
@@ -73,7 +74,11 @@ public final class CreateScratchFile implements ActionListener {
                 }
             });
 
-            webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/uiI/index.html").toExternalForm());
+            try {
+                webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/ui/index.html").toExternalForm());
+            } catch (Exception ex) {
+                Exceptions.printStackTrace(ex);
+            }
         });
 
         showDialog();
