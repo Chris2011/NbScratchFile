@@ -1,3 +1,6 @@
 # BUILD
 build
 # IDE
+/nbproject/private
+/src/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/node_modules/
+/src/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/nbproject/private/
