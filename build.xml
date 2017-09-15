@@ -5,4 +5,33 @@
 <project name="org.chrisle.netbeans.plugins.nbscratchfile" default="netbeans" basedir=".">
     <description>Builds, tests, and runs the project org.chrisle.netbeans.plugins.nbscratchfile.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <target name="compile" depends="init,up-to-date" unless="is.jar.uptodate">
+        <mkdir dir="${build.classes.dir}"/>
+        <depend srcdir="${src.dir}" destdir="${build.classes.dir}" cache="${build.dir}/depcache">
+            <classpath refid="cp"/>
+        </depend>
+        <property name="javac.fork" value="false"/>
+        <nb-javac srcdir="${src.dir}" destdir="${build.classes.dir}" debug="${build.compiler.debug}" debuglevel="${build.compiler.debuglevel}" encoding="UTF-8"
+                  deprecation="${build.compiler.deprecation}" optimize="${build.compiler.optimize}" source="${javac.source}" target="${javac.target}" includeantruntime="false"
+                  fork="${javac.fork}">
+            <classpath refid="cp"/>
+            <compilerarg line="${javac.compilerargs}"/>
+            <processorpath refid="processor.cp"/>
+        </nb-javac>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.dir}" excludes="${jar-excludes}">
+                <exclude name="**/components/filetypewindow/.projectKnowledge/**" />
+                <exclude name="**/components/filetypewindow/app/**" />
+                <exclude name="**/components/filetypewindow/build/**" />
+                <exclude name="**/components/filetypewindow/e2e/**" />
+                <exclude name="**/components/filetypewindow/nbproject/**" />
+                <exclude name="**/components/filetypewindow/tests/**" />
+                <exclude name="**/components/filetypewindow/node_modules/**" />
+            </fileset>
+        </copy>
+        <processjsannotation classes="${build.classes.dir}" asm="${asm.jar}">
+            <classpath refid="cp"/>
+        </processjsannotation>
+    </target>
 </project>
