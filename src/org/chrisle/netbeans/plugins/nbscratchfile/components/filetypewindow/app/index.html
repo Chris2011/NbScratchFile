@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Knockout TypeScript Live Search Sample</title>
+        <meta charset="UTF-8">
+
+        <link href="main.css" rel="stylesheet" />
+        <link href="sprite.css" rel="stylesheet" />
+        <!--<script src="http://getfirebug.com/releases/lite/1.4/firebug-lite-debug.js"></script>-->
+    </head>
+    <body>
+        <div class="wrapper">
+            <input id="languageSearch" data-bind="value: Language, valueUpdate: 'keyup', hasFocus: true" type="text" placeholder="Search available languages..." />
+        </div>
+
+        <ul id="languageTypes" data-bind="foreach: LanguageTypes">
+            <li data-bind="click: setExt">
+                <div class="icon" data-bind="css: `svg-${Icon}`"></div>
+                <div data-bind="text: LanguageName"></div>
+                <div class="small-text" data-bind="text: FileExt && `(.${FileExt})`"></div>
+                <div class="small-text" data-bind="text: showPluginRequiredMessage()"></div>
+            </li>
+        </ul>
+
+        <!--        Test your code online on the fly: Babel transpiler: https://es6console.com/
+                UglifyJS online: https://skalman.github.io/UglifyJS-online/-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+        <script src="app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "name": "${author}",
+    "compilerOptions": {
+        "rootDir": "./",
+        "outDir": "./dist",
+        "sourceMap": true,
+        "target": "es6",
+        "noUnusedLocals": true,
+        "module": "commonjs"
+    }
+}

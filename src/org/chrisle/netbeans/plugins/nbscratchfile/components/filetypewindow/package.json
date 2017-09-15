@@ -1,0 +1,59 @@
+{
+  "name": "NbScratchFileWindow",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "${author}",
+  "contributors": [],
+  "dependencies": {
+    "typescript": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.1",
+    "@types/knockout": "^3.4.41",
+    "@types/mocha": "^2.2.41",
+    "@types/protractor": "^4.0.0",
+    "@types/webpack-env": "^1.13.0",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "chai": "^4.1.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "jimp": "^0.2.28",
+    "mocha": "^3.4.2",
+    "node-sass": "^4.5.3",
+    "node-sprite-generator": "^0.10.2",
+    "protractor": "^5.1.2",
+    "sass-loader": "^6.0.6",
+    "source-map-explorer": "^1.4.0",
+    "svg-sprite": "^1.3.7",
+    "svg-sprite-loader": "^3.0.5",
+    "svg2png-many": "0.0.7",
+    "ts-loader": "^2.2.2",
+    "ts-node": "^3.2.0",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
+  },
+  "scripts": {
+    "build-dev-old": "npm run test && npm run gen-sprite && webpack",
+    "build-prod-old": "npm run test && npm run gen-sprite && webpack --optimize-minimize",
+    "gen-sprite-old": "svg-sprite --css --css-render-css --css-example --dest=dist app/icons/*.svg",
+    "build-dev": "npm run test && npm run svg2png && webpack",
+    "fast-build-dev": "webpack",
+    "build-prod": "npm run test && npm run svg2png && webpack --optimize-minimize",
+    "svg2png": "svg2png-many -i ./app/icons -o ./dist/icons -w 16 -h 16 && node ./build/gen-sprite.js",
+    "analyze-package": "source-map-explorer ./dist/app.js ./dist/app.js.map",
+    "pree2e": "webdriver-manager update",
+    "e2e": "protractor",
+    "serve": "webpack-dev-server",
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts"
+  }
+}
