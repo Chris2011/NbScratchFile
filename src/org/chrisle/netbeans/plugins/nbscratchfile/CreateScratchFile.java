@@ -1,8 +1,6 @@
 package org.chrisle.netbeans.plugins.nbscratchfile;
 
-import org.chrisle.netbeans.plugins.nbscratchfile.model.NbScratchFileViewModel;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +19,7 @@ import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import netscape.javascript.JSObject;
+import org.chrisle.netbeans.plugins.nbscratchfile.model.NbScratchFileViewModel;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
