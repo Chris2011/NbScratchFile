@@ -1,10 +1,14 @@
 package org.chrisle.netbeans.plugins.nbscratchfile;
 
+import org.chrisle.netbeans.plugins.nbscratchfile.model.NbScratchFileViewModel;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
@@ -15,6 +19,7 @@ import javafx.scene.web.WebView;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
 import netscape.javascript.JSObject;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
@@ -54,6 +59,19 @@ public final class CreateScratchFile implements ActionListener {
         dialog.setResizable(false);
         dialog.setAlwaysOnTop(true);
         dialog.setUndecorated(true);
+        dialog.addWindowFocusListener(new WindowFocusListener() {
+            @Override
+            public void windowGainedFocus(WindowEvent e) {}
+
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                if (SwingUtilities.isDescendingFrom(e.getOppositeWindow(), dialog)) {
+                    return;
+                }
+
+                dialog.setVisible(false);
+            }
+        });
 
         dialog.getRootPane().registerKeyboardAction((ActionEvent e1) -> {
             dialog.setVisible(false);
@@ -75,7 +93,7 @@ public final class CreateScratchFile implements ActionListener {
             });
 
             try {
-                webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/ui/index.html").toExternalForm());
+                webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/dist/index.html").toExternalForm());
             } catch (Exception ex) {
                 Exceptions.printStackTrace(ex);
             }
