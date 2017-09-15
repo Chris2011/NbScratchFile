@@ -1,4 +1,4 @@
-package org.chrisle.netbeans.plugins.nbscratchfile.model;
+package org.chrisle.netbeans.plugins.nbscratchfile;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;

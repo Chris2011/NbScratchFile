@@ -19,7 +19,6 @@ import javax.swing.JDialog;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import netscape.javascript.JSObject;
-import org.chrisle.netbeans.plugins.nbscratchfile.model.NbScratchFileViewModel;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
