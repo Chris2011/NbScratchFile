@@ -41,7 +41,7 @@ export class FileType {
         return this.language;
     }
 
-    public get LanguageTypes(): KnockoutObservable<Array<LanguageType>> {
-        return this.languageTypes;
+    public get LanguageTypes(): LanguageType[] {
+        return this.languageTypes();
     }
 }

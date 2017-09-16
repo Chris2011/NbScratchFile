@@ -69,11 +69,15 @@ export class App {
     }
 
     public main(): void {
+
         this.fileTypeWindowViewModel.Language.subscribe(() => {
             this.languageTypesListModel.init();
         });
 
         ko.applyBindings(this.fileTypeWindowViewModel);
+
+        console.log(this.fileTypeWindowViewModel.LanguageTypes.length);
+        console.log(this.fileTypeWindowViewModel.LanguageTypes);
 
         this.languageTypesListModel.init();
         this.languageTypesListModel.handleItemSelectionWithArrowKeys();
