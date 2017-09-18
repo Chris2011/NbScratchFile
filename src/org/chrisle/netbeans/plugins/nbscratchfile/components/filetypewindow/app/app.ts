@@ -1,3 +1,4 @@
+import * as ko from 'knockout';
 import {FileType} from "./model/FileType";
 import {LanguageType} from "./model/LanguageType";
 import {LanguageTypesDOMModel} from "./model/LanguageTypesDOMModel";
