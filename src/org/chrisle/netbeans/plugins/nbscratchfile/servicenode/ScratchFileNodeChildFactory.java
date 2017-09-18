@@ -9,7 +9,7 @@ import org.openide.nodes.ChildFactory;
  * @author Chrl
  */
 public class ScratchFileNodeChildFactory extends ChildFactory<File> {
-    private File scratchDir;
+    private final File scratchDir;
 
     public ScratchFileNodeChildFactory(File scratchDir) {
         this.scratchDir = scratchDir;
@@ -17,6 +17,6 @@ public class ScratchFileNodeChildFactory extends ChildFactory<File> {
 
     @Override
     protected boolean createKeys(List<File> list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return true;
     }
 }
