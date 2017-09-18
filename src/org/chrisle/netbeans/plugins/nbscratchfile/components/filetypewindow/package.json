@@ -11,6 +11,7 @@
   "author": "${author}",
   "contributors": [],
   "dependencies": {
+    "knockout": "^3.4.2",
     "typescript": "^2.4.1"
   },
   "devDependencies": {
