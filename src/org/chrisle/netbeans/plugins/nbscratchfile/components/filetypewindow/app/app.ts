@@ -77,9 +77,6 @@ export class App {
 
         ko.applyBindings(this.fileTypeWindowViewModel);
 
-        console.log(this.fileTypeWindowViewModel.LanguageTypes.length);
-        console.log(this.fileTypeWindowViewModel.LanguageTypes);
-
         this.languageTypesListModel.init();
         this.languageTypesListModel.handleItemSelectionWithArrowKeys();
         this.languageTypesListModel.selectFirstElem();
