@@ -1,4 +1,4 @@
-import {} from 'knockout';
+import * as ko from 'knockout';
 import {LanguageType} from "./LanguageType";
 
 /**

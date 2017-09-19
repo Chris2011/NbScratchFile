@@ -1,3 +1,4 @@
+import * as ko from 'knockout';
 import {FileType} from "./model/FileType";
 import {LanguageType} from "./model/LanguageType";
 import {LanguageTypesDOMModel} from "./model/LanguageTypesDOMModel";
@@ -75,9 +76,6 @@ export class App {
         });
 
         ko.applyBindings(this.fileTypeWindowViewModel);
-
-        console.log(this.fileTypeWindowViewModel.LanguageTypes.length);
-        console.log(this.fileTypeWindowViewModel.LanguageTypes);
 
         this.languageTypesListModel.init();
         this.languageTypesListModel.handleItemSelectionWithArrowKeys();

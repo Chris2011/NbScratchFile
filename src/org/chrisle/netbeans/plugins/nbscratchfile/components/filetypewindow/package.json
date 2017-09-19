@@ -11,6 +11,7 @@
   "author": "${author}",
   "contributors": [],
   "dependencies": {
+    "knockout": "^3.4.2",
     "typescript": "^2.4.1"
   },
   "devDependencies": {
@@ -49,7 +50,7 @@
     "build-dev": "npm run test && npm run svg2png && webpack",
     "fast-build-dev": "webpack",
     "build-prod": "npm run test && npm run svg2png && webpack --optimize-minimize",
-    "svg2png": "svg2png-many -i ./app/icons -o ./dist/icons -w 16 -h 16 && node ./build/gen-sprite.js",
+    "svg2png": "svg2png-many -i ./app/icons -o ./dist/icons -w 16 -h 16 && node ./build-scripts/gen-sprite.js",
     "analyze-package": "source-map-explorer ./dist/app.js ./dist/app.js.map",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",

@@ -41,6 +41,11 @@ body {
             transition: background-color 100ms ease, color 100ms ease;
             display: flex;
             align-items: center;
+            
+            div {
+                display: inline-block;
+                vertical-align: middle;
+            }
 
             .icon {
                 width: 16px;
