@@ -25,7 +25,6 @@ public class ScratchRootNodeChildFactory extends ChildFactory<File> {
 
     @Override
     protected Node createNodeForKey(File key) {
-//        Node result = new AbstractNode(Children.create(new ScratchRootNodeChildFactory(_host), true), Lookups.singleton(key));
         AbstractNode result = new AbstractNode(Children.create(new ScratchFileNodeChildFactory(key), true), Lookups.singleton(key));
 
         result.setDisplayName(key.getName());
