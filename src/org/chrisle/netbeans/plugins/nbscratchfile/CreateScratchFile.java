@@ -63,10 +63,6 @@ public final class CreateScratchFile implements ActionListener {
 
             @Override
             public void windowLostFocus(WindowEvent e) {
-                if (SwingUtilities.isDescendingFrom(e.getOppositeWindow(), dialog)) {
-                    return;
-                }
-
                 dialog.setVisible(false);
             }
         });
