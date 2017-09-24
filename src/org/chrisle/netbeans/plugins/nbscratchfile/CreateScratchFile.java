@@ -17,7 +17,6 @@ import javafx.scene.web.WebView;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 import netscape.javascript.JSObject;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
