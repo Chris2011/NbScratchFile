@@ -6,8 +6,8 @@ import org.openide.nodes.AbstractNode;
 import org.openide.nodes.Children;
 
 @ActionID(
-    category = "Team",
-    id = "org.chrisle.netbeans.modules.gitrepoviewer.service.GitRepoNode"
+    category = "Tools",
+    id = "org.chrisle.netbeans.plugins.nbscratchfile.servicenode.ScratchRootNode"
 )
 @ServicesTabNodeRegistration(
         name = "ScratchRootNode",
