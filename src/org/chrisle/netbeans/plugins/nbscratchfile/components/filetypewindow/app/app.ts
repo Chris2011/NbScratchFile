@@ -70,7 +70,6 @@ export class App {
     }
 
     public main(): void {
-
         this.fileTypeWindowViewModel.Language.subscribe(() => {
             this.languageTypesListModel.init();
         });

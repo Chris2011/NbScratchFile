@@ -3,7 +3,7 @@
  * @author Chrl
  */
 
-declare var NbScratchFileViewModel: any;
+declare const NbScratchFileViewModel: any;
 
 export class LanguageType {
     private icon: string;

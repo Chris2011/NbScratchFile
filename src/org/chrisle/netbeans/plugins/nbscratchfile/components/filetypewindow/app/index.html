@@ -17,7 +17,7 @@
         <ul id="languageTypes" data-bind="foreach: LanguageTypes">
             <li data-bind="click: setExt">
                 <div class="icon" data-bind="css: 'svg-' + Icon"></div>
-                <div data-bind="text: LanguageName"></div>
+                <label data-bind="text: LanguageName"></label>
                 <div class="small-text" data-bind="text: FileExt && '(' + FileExt + ')'"></div>
                 <div class="small-text" data-bind="text: showPluginRequiredMessage()"></div>
             </li>

@@ -6,6 +6,7 @@ import {LanguageType} from "../app/model/LanguageType";
 // if you used the '@types/mocha' method to install mocha type definitions, uncomment the following line
 // import 'mocha';
 import {expect} from 'chai';
+import {} from 'mocha';
 
 describe('LanguagType LanguagName getter', () => {
     it('should return JavaScript', () => {

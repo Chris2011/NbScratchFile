@@ -24,6 +24,9 @@ import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.events.EventTarget;
 
 @ActionID(
         category = "Tools",
@@ -40,6 +43,7 @@ import org.openide.util.NbBundle.Messages;
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
+
     private final JDialog dialog;
     private final JFXPanel jfxPanel;
     private WebView webView;
@@ -58,7 +62,8 @@ public final class CreateScratchFile implements ActionListener {
         dialog.setUndecorated(true);
         dialog.addWindowFocusListener(new WindowFocusListener() {
             @Override
-            public void windowGainedFocus(WindowEvent e) {}
+            public void windowGainedFocus(WindowEvent e) {
+            }
 
             @Override
             public void windowLostFocus(WindowEvent e) {
@@ -71,6 +76,32 @@ public final class CreateScratchFile implements ActionListener {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
+    private void colorizeElement(Element sourceElem, String css) {
+        sourceElem.setAttribute("style", css);
+    }
+
+    private void colorizeElements(NodeList sourceElements, String css) {
+        for (int i = 0; i < sourceElements.getLength(); i++) {
+            colorizeElement((Element) sourceElements.item(i), css);
+        }
+    }
+
+    private void addHoverEffectToElement(Element sourceElem, String newCss, String oldCss) {
+        ((EventTarget) sourceElem).addEventListener("mouseover", (elem) -> {
+            sourceElem.setAttribute("style", newCss);
+        }, false);
+
+        ((EventTarget) sourceElem).addEventListener("mouseout", (elem) -> {
+            sourceElem.setAttribute("style", oldCss);
+        }, false);
+    }
+
+    private void addHoverEffectToElements(NodeList sourceElements, String newCss, String oldCss) {
+        for (int i = 0; i < sourceElements.getLength(); i++) {
+            addHoverEffectToElement((Element)sourceElements.item(i), newCss, oldCss);
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Platform.runLater(() -> {
@@ -81,7 +112,14 @@ public final class CreateScratchFile implements ActionListener {
             webEngine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends State> ov, State oldState, State newState) -> {
                 if (newState == State.SUCCEEDED) {
                     JSObject win = (JSObject) webView.getEngine().executeScript("window");
-                    win.setMember("NbScratchFileViewModel", this.viewModel);
+
+                    win.setMember("NbScratchFileViewModel", CreateScratchFile.this.viewModel);
+
+                    colorizeElement(webEngine.getDocument().getElementById("languageSearch"), String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
+                    colorizeElement((Element) webEngine.getDocument().getElementsByTagName("body").item(0), String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
+                    colorizeElement((Element) webEngine.getDocument().getElementsByTagName("ul").item(0), String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
+
+                    addHoverEffectToElements(webEngine.getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
                 }
             });
 
@@ -96,7 +134,7 @@ public final class CreateScratchFile implements ActionListener {
     }
 
     public void showDialog() {
-        // try to use monitor, where the input focus is
+        // try to use monitor, where the input focus isOk gu
         // therefor get the topmost component based on the input focus
         Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
 

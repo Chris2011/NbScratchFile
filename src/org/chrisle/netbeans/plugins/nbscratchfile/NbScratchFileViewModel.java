@@ -1,5 +1,6 @@
 package org.chrisle.netbeans.plugins.nbscratchfile;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -7,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import org.netbeans.api.actions.Openable;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
@@ -40,5 +42,13 @@ public class NbScratchFileViewModel {
             JOptionPane.showMessageDialog(null, ex.getMessage());
             Exceptions.printStackTrace(ex);
         }
+    }
+
+    public String getColor(String colorString, Boolean brighter) {
+        return brighter ? getHex(UIManager.getColor(colorString).brighter()) : getHex(UIManager.getColor(colorString));
+    }
+
+    private String getHex(Color rgbColor) {
+        return String.format("#%s%s%s", Integer.toHexString(rgbColor.getRed()), Integer.toHexString(rgbColor.getGreen()), Integer.toHexString(rgbColor.getBlue()));
     }
 }

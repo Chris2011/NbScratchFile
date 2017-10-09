@@ -173,7 +173,6 @@ export class LanguageTypesDOMModel {
     }
 
     public getDataFromSelectedElem(): void {
-        console.log(this.selectedElem);
         this.selectedElem && this.selectedElem.addEventListener('keydown', e => {
             if(e.keyCode === KeyCode.Enter) {
                 console.log(this.selectedElem);
