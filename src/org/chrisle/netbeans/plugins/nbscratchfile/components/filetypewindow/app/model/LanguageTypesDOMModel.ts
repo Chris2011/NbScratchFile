@@ -4,6 +4,8 @@ enum KeyCode {
     Down = 40
 }
 
+declare const NbScratchFileViewModel: any;
+
 export class LanguageTypesDOMModel {
     private languageTypeList: HTMLUListElement = null;
     private languageTypeListItems: NodeListOf<HTMLLIElement>;
@@ -139,23 +141,27 @@ export class LanguageTypesDOMModel {
     }
 
     public handleItemSelectionWithArrowKeys(): void {
-        document.querySelector('body').addEventListener('keydown', (evt: KeyboardEvent) => {
+        document.querySelector('body').addEventListener('keydown', (e: KeyboardEvent) => {
             this.SelectedElem = document.querySelector('.selected') as HTMLLIElement;
 
-            if(evt.keyCode === KeyCode.Up) {
-                evt.preventDefault();
+            if(e.keyCode === KeyCode.Up) {
+                e.preventDefault();
 
                 this.moveUp();
-            } else if(evt.keyCode === KeyCode.Down) {
-                evt.preventDefault();
+            } else if(e.keyCode === KeyCode.Down) {
+                e.preventDefault();
 
                 this.moveDown();
+            }
+
+            if(e.keyCode === KeyCode.Enter) {
+                this.getDataFromSelectedElem(e);
             }
         });
     }
 
     public selectFirstElem(): void {
-        this.inputField.addEventListener('keyup', e => {
+        this.inputField.addEventListener('keyup', (e: KeyboardEvent) => {
             if(e.keyCode !== KeyCode.Down && e.keyCode !== KeyCode.Up) {
                 this.selectedElem = document.querySelector('.selected') as HTMLLIElement;
 
@@ -168,15 +174,15 @@ export class LanguageTypesDOMModel {
                 } else {
                     this.firstListElem && this.firstListElem.classList.remove('selected');
                 }
+
             }
         });
     }
 
-    public getDataFromSelectedElem(): void {
-        this.selectedElem && this.selectedElem.addEventListener('keydown', e => {
-            if(e.keyCode === KeyCode.Enter) {
-                console.log(this.selectedElem);
-            }
-        });
+    public getDataFromSelectedElem(e: KeyboardEvent): void {
+        if(this.selectedElem) {
+            this.inputField.value = '';
+            NbScratchFileViewModel.setExt(this.selectedElem.querySelector('.ext').textContent.replace('(', '').replace(')', ''), this.selectedElem.querySelector('.name').textContent);
+        }
     }
 }
