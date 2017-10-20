@@ -43,7 +43,6 @@ import org.w3c.dom.events.EventTarget;
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
-
     private final JDialog dialog;
     private final JFXPanel jfxPanel;
     private WebView webView;
@@ -53,8 +52,13 @@ public final class CreateScratchFile implements ActionListener {
     public CreateScratchFile() {
         dialog = new JDialog();
         jfxPanel = new JFXPanel();
-        this.viewModel = new NbScratchFileViewModel(dialog);
+        viewModel = new NbScratchFileViewModel(dialog);
 
+        initDialog();
+        initWebView();
+    }
+
+    private void initDialog() {
         dialog.add(jfxPanel);
         dialog.setSize(700, 450);
         dialog.setResizable(false);
@@ -98,17 +102,15 @@ public final class CreateScratchFile implements ActionListener {
 
     private void addHoverEffectToElements(NodeList sourceElements, String newCss, String oldCss) {
         for (int i = 0; i < sourceElements.getLength(); i++) {
-            addHoverEffectToElement((Element)sourceElements.item(i), newCss, oldCss);
+            addHoverEffectToElement((Element) sourceElements.item(i), newCss, oldCss);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Platform.runLater(() -> {
-            webView = new WebView();
-            jfxPanel.setScene(new Scene(webView));
-            webEngine = webView.getEngine();
+        showDialog();
 
+        Platform.runLater(() -> {
             webEngine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends State> ov, State oldState, State newState) -> {
                 if (newState == State.SUCCEEDED) {
                     JSObject win = (JSObject) webView.getEngine().executeScript("window");
@@ -122,6 +124,14 @@ public final class CreateScratchFile implements ActionListener {
                     addHoverEffectToElements(webEngine.getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
                 }
             });
+        });
+    }
+
+    private void initWebView() {
+        Platform.runLater(() -> {
+            webView = new WebView();
+            jfxPanel.setScene(new Scene(webView));
+            webEngine = webView.getEngine();
 
             try {
                 webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/dist/index.html").toExternalForm());
@@ -129,8 +139,6 @@ public final class CreateScratchFile implements ActionListener {
                 Exceptions.printStackTrace(ex);
             }
         });
-
-        showDialog();
     }
 
     public void showDialog() {
