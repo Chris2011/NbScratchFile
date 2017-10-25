@@ -2,5 +2,7 @@
 build
 # IDE
 /nbproject/private
-/src/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/node_modules/
-/src/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/nbproject/private/
+/target/
+/src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui/nbproject/private/
+/src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui/node_modules/
+/src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui/node/

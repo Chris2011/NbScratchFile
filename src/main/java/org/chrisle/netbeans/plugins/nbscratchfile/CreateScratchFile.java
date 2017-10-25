@@ -34,7 +34,7 @@ import org.w3c.dom.events.EventTarget;
 )
 @ActionRegistration(
         displayName = "#CTL_CreateScratchFile",
-        iconBase = "org/chrisle/netbeans/plugins/nbscratchfile/resources/add_file.png"
+        iconBase = "org/chrisle/netbeans/plugins/nbscratchfile/add_file.png"
 )
 @ActionReferences({
     @ActionReference(path = "Menu/File", position = 150)
@@ -134,7 +134,7 @@ public final class CreateScratchFile implements ActionListener {
             webEngine = webView.getEngine();
 
             try {
-                webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/components/filetypewindow/dist/index.html").toExternalForm());
+                webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html").toExternalForm());
             } catch (Exception ex) {
                 Exceptions.printStackTrace(ex);
             }

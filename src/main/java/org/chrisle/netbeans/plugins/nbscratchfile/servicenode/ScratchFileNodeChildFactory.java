@@ -17,7 +17,6 @@ import org.openide.util.lookup.Lookups;
  * @author Chrl
  */
 public class ScratchFileNodeChildFactory extends ChildFactory<File> {
-
     private final File scratchDir;
 
     public ScratchFileNodeChildFactory(File scratchDir) {

@@ -28,7 +28,7 @@ public class ScratchRootNodeChildFactory extends ChildFactory<File> {
         AbstractNode result = new AbstractNode(Children.create(new ScratchFileNodeChildFactory(key), true), Lookups.singleton(key));
 
         result.setDisplayName(key.getName());
-        result.setIconBaseWithExtension("org/chrisle/netbeans/plugins/nbscratchfile/resources/folder.png");
+        result.setIconBaseWithExtension("org/chrisle/netbeans/plugins/nbscratchfile/folder.png");
 
         return result;
     }
