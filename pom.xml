@@ -7,6 +7,32 @@
     <artifactId>NbScratchFile</artifactId>
     <version>1.7.1-SNAPSHOT</version>
     <packaging>nbm</packaging>
+    <name>Chris2011</name>
+    <description>&lt;h1&gt;Scratch Files for Netbeans (Required JDK 8 &gt; 1.8.0_122 - &lt;a href="https://github.com/Chris2011/NbScratchFile/issues/1#issuecomment-331884374"&gt;#1&lt;/a&gt;)&lt;/h1&gt;
+
+&lt;h3&gt;With this plugin you can create scratch files which will be saved on disk. You don't need a project for this. After typing &lt;code&gt;Ctrl + Alt + Shift + N&lt;/code&gt; you can choose a language and the file will be saved to your user dir: &lt;code&gt;/userDir/.netbeans/scratches&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;The idea came up while using Sublime Text 2, where you can type &lt;code&gt;Ctrl + N&lt;/code&gt; to creates an empty file.
+This is really simple, it will open a new tab with a Untitled file. Nothins special.&lt;/p&gt;
+
+&lt;p&gt;IntelliJ has a similar but more powerful functionalty too: &lt;a href="http://blog.jetbrains.com/idea/2014/09/intellij-idea-14-eap-138-2210-brings-scratch-files-and-better-mercurial-integration/"&gt;IntelliJ IDEA 14 eap 138.2210 brings scratch files...&lt;/a&gt;. &lt;/p&gt;
+
+&lt;p&gt;So my plugin is more like the IntelliJ functionaliy, because you will choose the target language after hitting &lt;code&gt;Ctrl + Shift + Alt + N&lt;/code&gt; and it will open and automatically
+save the file to your user &lt;code&gt;/userDir/.netbeans/scratches&lt;/code&gt;. You can see all the saved scratches as nodes at &lt;code&gt;Services -&gt; Scratches&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id="screenshots"&gt;Screenshots&lt;/h2&gt;
+
+&lt;h3 id="filenewscratchfileorctrlaltshiftn"&gt;&lt;code&gt;File -&gt; New Scratch File&lt;/code&gt; or &lt;code&gt;Ctrl + Alt + Shift + N&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/screenshots/NbScratchFile.jpg?raw=true" alt="Alt text" /&gt;&lt;/p&gt;
+
+&lt;h3 id="choosetargetlanguage"&gt;Choose target language&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/screenshots/ChooseLanguage.gif?raw=true" alt="Alt text" /&gt;&lt;/p&gt;
+
+&lt;h3 id="servicenodeintegration"&gt;Service node integration&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src="/screenshots/ServiceNodeIntegration.gif?raw=true" alt="Alt text" /&gt;&lt;/p&gt;</description>
     <build>
         <resources>
             <resource>
@@ -68,6 +94,7 @@
                 <version>2.3.2</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <showDeprecation>false</showDeprecation>
                 </configuration>
             </plugin>
             <plugin>
@@ -161,15 +188,4 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    <name>Chris2011</name>
-    <description>&lt;h1&gt;# Scratch Files for Netbeans (Required JDK 8 &gt; 1.8.0_122 - &lt;a href="https://github.com/Chris2011/NbScratchFile/issues/1#issuecomment-331884374"&gt;#1&lt;/a&gt;)&lt;/h1&gt;
-&lt;h3&gt;With this plugin you can create scratch files which will be saved on disk. You don't need a project for this. After typing `Ctrl + Alt + Shift + N` you can choose a language and the file will be saved to your user dir: `/userDir/.netbeans/scratches`&lt;/h3&gt;
-
-&lt;p&gt;The idea came up while using Sublime Text 2, where you can type `Ctrl + N` to creates an empty file.
-This is really simple, it will open a new tab with a Untitled file. Nothins special.&lt;/p&gt;
-
-&lt;p&gt;IntelliJ has a similar but more powerful functionalty too: &lt;a href="http://blog.jetbrains.com/idea/2014/09/intellij-idea-14-eap-138-2210-brings-scratch-files-and-better-mercurial-integration/"&gt;IntelliJ IDEA 14 eap 138.2210 brings scratch files...&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;So my plugin is more like the IntelliJ functionaliy, because you will choose the target language after hitting `Ctrl + Shift + Alt + N` and it will open and automatically
-save the file to your user `/userDir/.netbeans/scratches`. You can see all the saved scratches as nodes at `Services -&gt; Scratches`&lt;/p&gt;</description>
 </project>
