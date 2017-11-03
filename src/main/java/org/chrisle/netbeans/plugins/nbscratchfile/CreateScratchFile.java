@@ -55,7 +55,12 @@ public final class CreateScratchFile implements ActionListener {
         viewModel = new NbScratchFileViewModel(dialog);
 
         initDialog();
-        initWebView();
+
+        Platform.runLater(() -> {
+            webView = new WebView();
+            jfxPanel.setScene(new Scene(webView));
+            webEngine = webView.getEngine();
+        });
     }
 
     private void initDialog() {
@@ -109,32 +114,27 @@ public final class CreateScratchFile implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         showDialog();
-
-        Platform.runLater(() -> {
-            webEngine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends State> ov, State oldState, State newState) -> {
-                if (newState == State.SUCCEEDED) {
-                    JSObject win = (JSObject) webView.getEngine().executeScript("window");
-
-                    win.setMember("NbScratchFileViewModel", CreateScratchFile.this.viewModel);
-
-                    colorizeElement(webEngine.getDocument().getElementById("languageSearch"), String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
-                    colorizeElement((Element) webEngine.getDocument().getElementsByTagName("body").item(0), String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
-                    colorizeElement((Element) webEngine.getDocument().getElementsByTagName("ul").item(0), String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
-
-                    addHoverEffectToElements(webEngine.getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
-                }
-            });
-        });
+        initWebView();
     }
 
     private void initWebView() {
         Platform.runLater(() -> {
-            webView = new WebView();
-            jfxPanel.setScene(new Scene(webView));
-            webEngine = webView.getEngine();
+            webEngine.load(this.getClass().getResource("/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html").toExternalForm());
 
             try {
-                webEngine.load(CreateScratchFile.class.getResource("/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html").toExternalForm());
+                webEngine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends State> ov, State oldState, State newState) -> {
+                    if (newState == State.SUCCEEDED) {
+                        JSObject win = (JSObject) webView.getEngine().executeScript("window");
+
+                        win.setMember("NbScratchFileViewModel", CreateScratchFile.this.viewModel);
+
+                        colorizeElement(webEngine.getDocument().getElementById("languageSearch"), String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
+                        colorizeElement((Element) webEngine.getDocument().getElementsByTagName("body").item(0), String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
+                        colorizeElement((Element) webEngine.getDocument().getElementsByTagName("ul").item(0), String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
+
+                        addHoverEffectToElements(webEngine.getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
+                    }
+                });
             } catch (Exception ex) {
                 Exceptions.printStackTrace(ex);
             }
@@ -142,7 +142,7 @@ public final class CreateScratchFile implements ActionListener {
     }
 
     public void showDialog() {
-        // try to use monitor, where the input focus isOk gu
+        // try to use monitor, where the input focus is
         // therefor get the topmost component based on the input focus
         Component focusOwner = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
 
