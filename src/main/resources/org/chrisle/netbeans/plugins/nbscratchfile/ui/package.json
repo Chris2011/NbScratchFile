@@ -12,7 +12,7 @@
   "contributors": [],
   "dependencies": {
     "knockout": "^3.4.2",
-    "typescript": "^2.4.1"
+    "typescript": "^2.6.1"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
