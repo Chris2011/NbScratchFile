@@ -7,7 +7,7 @@
     <artifactId>NbScratchFile</artifactId>
     <version>1.7.1-SNAPSHOT</version>
     <packaging>nbm</packaging>
-    <name>Chris2011</name>
+    <name>NbScratchFile</name>
     <description>&lt;h1&gt;Scratch Files for Netbeans (Required JDK 8 &gt; 1.8.0_122 - &lt;a href="https://github.com/Chris2011/NbScratchFile/issues/1#issuecomment-331884374"&gt;#1&lt;/a&gt;)&lt;/h1&gt;
 
 &lt;h3&gt;With this plugin you can create scratch files which will be saved on disk. You don't need a project for this. After typing &lt;code&gt;Ctrl + Alt + Shift + N&lt;/code&gt; you can choose a language and the file will be saved to your user dir: &lt;code&gt;/userDir/.netbeans/scratches&lt;/code&gt;&lt;/h3&gt;
