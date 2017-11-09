@@ -6,3 +6,6 @@ build
 /src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui/nbproject/private/
 /src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui/node_modules/
 /src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui/node/
+/.idea
+/NbScratchFile.iml
+keystore
