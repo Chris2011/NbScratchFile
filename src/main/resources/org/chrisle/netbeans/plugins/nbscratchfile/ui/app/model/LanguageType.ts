@@ -1,8 +1,7 @@
 /**
  *
- * @author Chrl
+ * @author Chris2011
  */
-
 declare const NbScratchFileViewModel: any;
 
 export class LanguageType {
