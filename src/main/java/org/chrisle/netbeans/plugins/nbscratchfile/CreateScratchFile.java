@@ -7,26 +7,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
-import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker.State;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.KeyStroke;
-import netscape.javascript.JSObject;
+import net.java.html.js.JavaScriptBody;
+import org.netbeans.api.htmlui.HTMLComponent;
+import org.netbeans.api.htmlui.HTMLDialog;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle.Messages;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.events.EventTarget;
 
 @ActionID(
         category = "Tools",
@@ -44,23 +35,14 @@ import org.w3c.dom.events.EventTarget;
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
     private final JDialog dialog;
-    private final JFXPanel jfxPanel;
-    private WebView webView;
-    private WebEngine webEngine;
+    private final JComponent jfxPanel;
     private final NbScratchFileViewModel viewModel;
 
     public CreateScratchFile() {
         dialog = new JDialog();
-        jfxPanel = new JFXPanel();
         viewModel = new NbScratchFileViewModel(dialog);
-
+        jfxPanel = Pages.initWebView(viewModel);
         initDialog();
-
-        Platform.runLater(() -> {
-            webView = new WebView();
-            jfxPanel.setScene(new Scene(webView));
-            webEngine = webView.getEngine();
-        });
     }
 
     private void initDialog() {
@@ -85,16 +67,15 @@ public final class CreateScratchFile implements ActionListener {
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
-    private void colorizeElement(Element sourceElem, String css) {
-        sourceElem.setAttribute("style", css);
-    }
-
-    private void colorizeElements(NodeList sourceElements, String css) {
-        for (int i = 0; i < sourceElements.getLength(); i++) {
-            colorizeElement((Element) sourceElements.item(i), css);
-        }
-    }
-
+    @JavaScriptBody(
+        args = { "id", "tag", "css" }, body = "\n"
+                + "var sourceElem = id ? document.getElementById(id) : document.getElementsByTagName(tag)[0];\n"
+                + "sourceElem.setAttribute('style', css);\n"
+                + ""
+    )
+    private static native void colorizeElement(String id, String tag, String css);
+    
+    /* this would rather be done on the TypeScript side as it doesn't talk to Java:
     private void addHoverEffectToElement(Element sourceElem, String newCss, String oldCss) {
         ((EventTarget) sourceElem).addEventListener("mouseover", (elem) -> {
             sourceElem.setAttribute("style", newCss);
@@ -110,36 +91,39 @@ public final class CreateScratchFile implements ActionListener {
             addHoverEffectToElement((Element) sourceElements.item(i), newCss, oldCss);
         }
     }
+*/
 
     @Override
     public void actionPerformed(ActionEvent e) {
         showDialog();
-        initWebView();
     }
 
-    private void initWebView() {
-        Platform.runLater(() -> {
-            webEngine.load(this.getClass().getResource("/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html").toExternalForm());
+    @HTMLComponent(url = "/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html", type = JComponent.class)
+    static void initWebView(NbScratchFileViewModel viewModel) {
+        exposeModel("NbScratchFileViewModel", viewModel);
 
-            try {
-                webEngine.getLoadWorker().stateProperty().addListener((ObservableValue<? extends State> ov, State oldState, State newState) -> {
-                    if (newState == State.SUCCEEDED) {
-                        JSObject win = (JSObject) webView.getEngine().executeScript("window");
+        colorizeElement("languageSearch", null, String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
+        colorizeElement(null, "body", String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
+        colorizeElement(null, "ul", String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
 
-                        win.setMember("NbScratchFileViewModel", CreateScratchFile.this.viewModel);
-
-                        colorizeElement(webEngine.getDocument().getElementById("languageSearch"), String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
-                        colorizeElement((Element) webEngine.getDocument().getElementsByTagName("body").item(0), String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
-                        colorizeElement((Element) webEngine.getDocument().getElementsByTagName("ul").item(0), String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
-
-                        addHoverEffectToElements(webEngine.getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
-                    }
-                });
-            } catch (Exception ex) {
-                Exceptions.printStackTrace(ex);
-            }
-        });
+//        addHoverEffectToElements(webEngine.getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
     }
+    
+    @HTMLDialog(url = "/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html")
+    static void workaroundNetBeansBug148() {
+    }
+    
+    @JavaScriptBody(args = { "name", "value" }, javacall = true, body = "\n"
+        + "window[name] = {"
+            + "setExt : function(ext, languageName) {\n"
+            + "  value.@org.chrisle.netbeans.plugins.nbscratchfile.NbScratchFileViewModel::setExt(Ljava/lang/String;Ljava/lang/String;)(ext, languageName);\n"
+            + "},\n"
+            + "getColor : function(colorString, brighter) {\n"
+            + "  return value.@org.chrisle.netbeans.plugins.nbscratchfile.NbScratchFileViewModel::getColor(Ljava/lang/String;Ljava/lang/Boolean;)(colorString, brighter);\n"
+            + "}\n"
+        + "};"
+    )
+    private static native void exposeModel(String name, NbScratchFileViewModel value);
 
     public void showDialog() {
         // try to use monitor, where the input focus is
