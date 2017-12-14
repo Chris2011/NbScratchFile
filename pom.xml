@@ -148,6 +148,19 @@
                     <verifyRuntime>skip</verifyRuntime>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.netbeans.html</groupId>
+                <artifactId>html4j-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process-js-annotations</goal>
+                        </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <repositories>
@@ -211,10 +224,26 @@
             <version>RELEASE82</version>
         </dependency>
         <dependency>
-            <groupId>com.github.eirslett</groupId>
-            <artifactId>frontend-maven-plugin</artifactId>
-            <version>1.6</version>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>net-java-html-boot</artifactId>
+            <version>RELEASE82</version>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-api-htmlui</artifactId>
+            <version>RELEASE82</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-modules</artifactId>
+            <version>RELEASE82</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>net-java-html</artifactId>
+            <version>RELEASE82</version>
         </dependency>
     </dependencies>
     <properties>

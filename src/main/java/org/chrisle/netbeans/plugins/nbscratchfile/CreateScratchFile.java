@@ -17,56 +17,73 @@ package org.chrisle.netbeans.plugins.nbscratchfile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.chrisle.netbeans.plugins.utils.BaseWebViewDialogViewModel;
+import javax.swing.JComponent;
+import net.java.html.js.JavaScriptBody;
 import org.chrisle.netbeans.plugins.utils.WebViewDialog;
+import org.netbeans.api.htmlui.HTMLComponent;
+import org.netbeans.api.htmlui.HTMLDialog;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
-import org.w3c.dom.Element;
 
 /**
  *
  * @author Chris2011
  */
 @ActionID(
-        category = "Tools",
-        id = "org.chrisle.netbeans.plugins.nbscratchfile.CreateScratchFile"
+    category = "Tools",
+    id = "org.chrisle.netbeans.plugins.nbscratchfile.CreateScratchFile"
 )
 @ActionRegistration(
-        displayName = "#CTL_CreateScratchFile",
-        iconBase = "org/chrisle/netbeans/plugins/nbscratchfile/add_file.png"
+    displayName = "#CTL_CreateScratchFile",
+    iconBase = "org/chrisle/netbeans/plugins/nbscratchfile/add_file.png"
 )
 @ActionReferences({
-    @ActionReference(path = "Menu/File", position = 150)
-    ,
+    @ActionReference(path = "Menu/File", position = 150),
     @ActionReference(path = "Shortcuts", name = "DOS-N")
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
-
-    private final WebViewDialog dialog;
-    private final BaseWebViewDialogViewModel viewModel;
+    private static final WebViewDialog dialog = new WebViewDialog();
+    private static final String viewPath = "/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html";
+    private final NbScratchFileViewModel viewModel;
 
     public CreateScratchFile() {
-        dialog = new WebViewDialog();
         viewModel = new NbScratchFileViewModel(dialog);
 
-        dialog.setViewModel("NbScratchFileViewModel", viewModel);
-        dialog.setViewPath("/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html");
-        dialog.init();
+        dialog.init(Pages.initWebView(viewModel));
     }
+
+    @HTMLComponent(url = CreateScratchFile.viewPath, type = JComponent.class)
+    static void initWebView(NbScratchFileViewModel viewModel) {
+        exposeModel("NbScratchFileViewModel", viewModel);
+
+        dialog.colorizeElement("languageSearch", null, String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
+        dialog.colorizeElement(null, "body", String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
+        dialog.colorizeElement(null, "ul", String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
+
+//        dialog.addHoverEffectToElements(dialog.getWebEngine().getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
+    }
+
+    @HTMLDialog(url = CreateScratchFile.viewPath)
+    public static void workaroundNetBeansBug148() {}
+
+    @JavaScriptBody(args = { "name", "value" }, javacall = true, body = ""
+        + "window[name] = {"
+            + "setExt : function(ext, languageName) {"
+            + "  value.@org.chrisle.netbeans.plugins.nbscratchfile.NbScratchFileViewModel::setExt(Ljava/lang/String;Ljava/lang/String;)(ext, languageName);"
+            + "},"
+            + "getColor : function(colorString, brighter) {"
+            + "  return value.@org.chrisle.netbeans.plugins.utils.BaseWebViewDialogViewModel::getColor(Ljava/lang/String;Ljava/lang/Boolean;)(colorString, brighter);"
+            + "}"
+        + "};"
+    )
+    private static native void exposeModel(String name, NbScratchFileViewModel value);
 
     @Override
     public void actionPerformed(ActionEvent e) {
         dialog.showDialog();
-        dialog.initWebView(() -> {
-            dialog.colorizeElement(dialog.getWebEngine().getDocument().getElementById("languageSearch"), String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
-            dialog.colorizeElement((Element) dialog.getWebEngine().getDocument().getElementsByTagName("body").item(0), String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
-            dialog.colorizeElement((Element) dialog.getWebEngine().getDocument().getElementsByTagName("ul").item(0), String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
-
-            dialog.addHoverEffectToElements(dialog.getWebEngine().getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
-        });
     }
 }
