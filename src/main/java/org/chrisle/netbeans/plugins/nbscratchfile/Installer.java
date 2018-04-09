@@ -8,6 +8,6 @@ import org.openide.windows.OnShowing;
 public class Installer extends ModuleInstall implements Runnable {
     @Override
     public void run() {
-        JOptionPane.showMessageDialog(null, "Tesssssssss");
+//        JOptionPane.showMessageDialog(null, "Tesssssssss");
     }
 }
