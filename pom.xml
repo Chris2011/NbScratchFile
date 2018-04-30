@@ -245,12 +245,12 @@
             <artifactId>net-java-html</artifactId>
             <version>RELEASE82</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm</artifactId>
             <type>jar</type>
             <version>5.0</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <properties>
         <project.author>Chris2011</project.author>
