@@ -119,6 +119,8 @@
                     <keystorealias>${project.author}</keystorealias>
                     <keystorepassword>${project.artifactId}</keystorepassword>
                     <homePageUrl>https://github.com/Chris2011/NbScratchFile</homePageUrl>
+                    <verifyIntegrity>false</verifyIntegrity>
+                    <useOSGiDependencies>true</useOSGiDependencies>
                 </configuration>
             </plugin>
             <plugin>
@@ -224,16 +226,36 @@
             <version>RELEASE82</version>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>net-java-html-boot</artifactId>
-            <version>RELEASE82</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-api-htmlui</artifactId>
             <version>RELEASE82</version>
             <type>jar</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-boot</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-boot-fx</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-geo</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.api</groupId>
+                    <artifactId>org-netbeans-libs-javafx</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -241,15 +263,10 @@
             <version>RELEASE82</version>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>net-java-html</artifactId>
-            <version>RELEASE82</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm</artifactId>
+            <groupId>org.netbeans.html</groupId>
+            <artifactId>net.java.html.boot</artifactId>
+            <version>1.5.1</version>
             <type>jar</type>
-            <version>5.0</version>
         </dependency>
     </dependencies>
     <properties>
