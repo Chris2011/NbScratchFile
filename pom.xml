@@ -265,8 +265,12 @@
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.boot</artifactId>
-            <version>1.5.1</version>
+            <version>1.3</version>
             <type>jar</type>
+        </dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>net-java-html</artifactId>
+            <version>RELEASE82</version>
         </dependency>
     </dependencies>
     <properties>
