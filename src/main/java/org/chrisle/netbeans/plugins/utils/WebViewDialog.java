@@ -27,6 +27,7 @@ import javax.swing.KeyStroke;
 import net.java.html.js.JavaScriptBody;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventTarget;
 
 /**
@@ -65,11 +66,11 @@ public class WebViewDialog extends JDialog {
     public native void colorizeElement(String id, String tag, String css);
 
     private void addHoverEffectToElement(Element sourceElem, String newCss, String oldCss) {
-        ((EventTarget) sourceElem).addEventListener("mouseover", (elem) -> {
+        ((EventTarget) sourceElem).addEventListener("mouseover", (Event elem) -> {
             sourceElem.setAttribute("style", newCss);
         }, false);
 
-        ((EventTarget) sourceElem).addEventListener("mouseout", (elem) -> {
+        ((EventTarget) sourceElem).addEventListener("mouseout", (Event elem) -> {
             sourceElem.setAttribute("style", oldCss);
         }, false);
     }

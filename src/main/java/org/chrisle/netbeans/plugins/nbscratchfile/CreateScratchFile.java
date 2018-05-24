@@ -46,44 +46,22 @@ import org.openide.util.NbBundle.Messages;
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
-    private static final WebViewDialog dialog = new WebViewDialog();
-    private static final String viewPath = "/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html";
-    private final NbScratchFileViewModel viewModel;
+    private static WebViewDialog _dialog;
+    public static final String viewPath = "/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html";
+//    private final NbScratchFileViewModel viewModel;
 
-    public CreateScratchFile() {
-        viewModel = new NbScratchFileViewModel(dialog);
+//    public CreateScratchFile() {
+//        viewModel = new NbScratchFileViewModel(dialog);
+//
+//        dialog.init(Pages.initWebView(viewModel));
+//    }
 
-        dialog.init(Pages.initWebView(viewModel));
+    public static void setDialog(WebViewDialog dialog) {
+        _dialog = dialog;
     }
-
-    @HTMLComponent(url = CreateScratchFile.viewPath, type = JComponent.class)
-    static void initWebView(NbScratchFileViewModel viewModel) {
-        exposeModel("NbScratchFileViewModel", viewModel);
-
-        dialog.colorizeElement("languageSearch", null, String.format("background-color: %s; color: %s;", viewModel.getColor("TextField.background", false), viewModel.getColor("TextField.foreground", false)));
-        dialog.colorizeElement(null, "body", String.format("background-color: %s;", viewModel.getColor("Menu.background", false)));
-        dialog.colorizeElement(null, "ul", String.format("color: %s;", viewModel.getColor("Label.foreground", false)));
-
-//        dialog.addHoverEffectToElements(dialog.getWebEngine().getDocument().getElementsByTagName("li"), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", true), viewModel.getColor("Menu.foreground", true)), String.format("background-color: %s; color: %s;", viewModel.getColor("Menu.background", false), viewModel.getColor("Menu.foreground", false)));
-    }
-
-    @HTMLDialog(url = CreateScratchFile.viewPath)
-    public static void workaroundNetBeansBug148() {}
-
-    @JavaScriptBody(args = { "name", "value" }, javacall = true, body = ""
-        + "window[name] = {"
-            + "setExt : function(ext, languageName) {"
-            + "  value.@org.chrisle.netbeans.plugins.nbscratchfile.NbScratchFileViewModel::setExt(Ljava/lang/String;Ljava/lang/String;)(ext, languageName);"
-            + "},"
-            + "getColor : function(colorString, brighter) {"
-            + "  return value.@org.chrisle.netbeans.plugins.utils.BaseWebViewDialogViewModel::getColor(Ljava/lang/String;Ljava/lang/Boolean;)(colorString, brighter);"
-            + "}"
-        + "};"
-    )
-    private static native void exposeModel(String name, NbScratchFileViewModel value);
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        dialog.showDialog();
+        _dialog.showDialog();
     }
 }
