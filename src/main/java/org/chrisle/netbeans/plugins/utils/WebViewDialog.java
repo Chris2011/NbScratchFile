@@ -15,6 +15,7 @@
  */
 package org.chrisle.netbeans.plugins.utils;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -39,10 +40,13 @@ public class WebViewDialog extends JDialog {
 
     public void init(JComponent jfxPanel) {
         super.add(jfxPanel);
-        super.setSize(700, 450);
+        super.setSize(550, 436);
         super.setResizable(false);
         super.setAlwaysOnTop(true);
         super.setUndecorated(true);
+        super.getRootPane().setOpaque(false);
+        super.getContentPane().setBackground(new Color(0, 0, 0, 0));
+        super.setBackground(new Color(0, 0, 0, 0));
 
         super.addWindowFocusListener(new WindowFocusListener() {
             @Override
@@ -61,8 +65,8 @@ public class WebViewDialog extends JDialog {
     }
 
     @JavaScriptBody(args = { "id", "tag", "css" }, body = ""
-        + "var sourceElem = id ? document.getElementById(id) : document.getElementsByTagName(tag)[0];"
-        + "sourceElem.setAttribute('style', css);")
+            + "var sourceElem = id ? document.getElementById(id) : document.getElementsByTagName(tag)[0];"
+            + "sourceElem.setAttribute('style', css);")
     public native void colorizeElement(String id, String tag, String css);
 
     private void addHoverEffectToElement(Element sourceElem, String newCss, String oldCss) {

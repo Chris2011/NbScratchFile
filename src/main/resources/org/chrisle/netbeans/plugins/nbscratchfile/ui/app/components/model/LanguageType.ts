@@ -2,6 +2,8 @@
  *
  * @author Chrl
  */
+declare const NbScratchFileViewModel: any;
+
 export class LanguageType {
     private icon: string;
     private languageName: string;
@@ -36,6 +38,10 @@ export class LanguageType {
     }
 
     public setExt(languageType: LanguageType): void {
-        console.log(`Chosen extension - ${languageType.FileExt}`);
+        NbScratchFileViewModel.setExt(languageType.FileExt, languageType.LanguageName);
+    }
+
+    public showPluginRequiredMessage(): string {
+        return this.isPluginRequired ? ' - plugin is required' : '';
     }
 }
