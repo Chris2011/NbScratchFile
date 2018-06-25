@@ -46,6 +46,7 @@
                     <exclude>**/ui/tests/**</exclude>
                     <exclude>**/ui/node_modules/**</exclude>
                     <exclude>**/ui/node/**</exclude>
+                    <exclude>**/ui/.tmp/**</exclude>
                 </excludes>
             </resource>
         </resources>
@@ -82,21 +83,21 @@
                 <version>1.6</version>
                 <executions>
                     <execution>
-                        <id>install node and npm</id>
+                        <id>install node and yarn</id>
                         <goals>
-                            <goal>install-node-and-npm</goal>
+                            <goal>install-node-and-yarn</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>npm install</id>
+                        <id>yarn install</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>yarn</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>npm run build-prod</id>
+                        <id>yarn run build-prod</id>
                         <goals>
-                            <goal>npm</goal>
+                            <goal>yarn</goal>
                         </goals>
                         <configuration>
                             <arguments>run build-prod</arguments>
@@ -105,6 +106,7 @@
                 </executions>
                 <configuration>
                     <nodeVersion>v7.5.0</nodeVersion>
+                    <yarnVersion>v1.7.0</yarnVersion>
                     <workingDirectory>src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui</workingDirectory>
                 </configuration>
             </plugin>
