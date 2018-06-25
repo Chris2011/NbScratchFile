@@ -24,11 +24,12 @@ import org.openide.nodes.Children;
  * @author Chris2011
  */
 @ServicesTabNodeRegistration(
-        name = "ScratchRootNode",
-        displayName = "Scratches",
-        shortDescription = "Saved scratches",
-        iconResource = "org/chrisle/netbeans/plugins/nbscratchfile/add_file.png",
-        position = 2021)
+    name = "ScratchRootNode",
+    displayName = "Scratches",
+    shortDescription = "Saved scratches",
+    iconResource = "org/chrisle/netbeans/plugins/nbscratchfile/add_file.png",
+    position = 2021
+)
 public class ScratchRootNode extends AbstractNode {
     public ScratchRootNode() {
         super(Children.create(new ScratchRootNodeChildFactory(), true));

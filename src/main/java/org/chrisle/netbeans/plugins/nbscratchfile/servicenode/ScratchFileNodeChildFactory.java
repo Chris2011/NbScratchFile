@@ -47,14 +47,13 @@ public class ScratchFileNodeChildFactory extends ChildFactory<File> {
 
     @Override
     protected Node createNodeForKey(File key) {
-        Node result = null;
+        Node result;
 
         try {
             DataObject dataObject = DataObject.find(FileUtil.toFileObject(key));
 
             result = dataObject.getNodeDelegate();
             result.setDisplayName(key.getName());
-
         } catch (DataObjectNotFoundException ex) {
             result = new AbstractNode(Children.LEAF, Lookups.singleton(key));
         }
