@@ -1,0 +1,24 @@
+{
+    "elements": {
+        "app": {},
+        "style": {
+            "attributes": {
+                "lang": {}
+            }
+        }
+    },
+    "attributes": {
+        "v-bind": {},
+        ":class": {},
+        "v-bind:class": {},
+        "@click": {},
+        "v-on:click": {},
+        "v-for": {},
+        "name": {
+            "context": "script"
+        },
+        "v-model": {
+            "context": "input"
+        }
+    }
+}

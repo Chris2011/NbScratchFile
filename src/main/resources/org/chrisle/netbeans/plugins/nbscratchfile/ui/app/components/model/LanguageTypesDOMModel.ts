@@ -4,15 +4,12 @@ enum KeyCode {
     Down = 40
 }
 
-declare const NbScratchFileViewModel: any;
-
 export class LanguageTypesDOMModel {
     private languageTypeList: HTMLUListElement = null;
     private languageTypeListItems: NodeListOf<HTMLLIElement>;
     private firstListElem: HTMLLIElement = null;
     private lastListElem: HTMLLIElement = null;
     private selectedElem: HTMLLIElement = null;
-    //    private textOfSelectedLiElem: Node = null;
     private inputField: HTMLInputElement = null;
 
     private getIndexOfElem(selectedElem: HTMLLIElement): number {
@@ -85,7 +82,6 @@ export class LanguageTypesDOMModel {
                 this.selectedElem.classList.remove('selected');
 
                 this.selectedElem = this.lastListElem;
-                //                this.textOfSelectedLiElem = this.selectedElem.lastChild;
 
                 this.selectedElem.classList.toggle('selected');
                 this.languageTypeList.scrollTop = 800;
@@ -97,13 +93,11 @@ export class LanguageTypesDOMModel {
                 this.selectedElem.classList.remove('selected');
 
                 this.selectedElem = this.PreviousElement;
-                //                this.textOfSelectedLiElem = this.selectedElem.lastChild;
 
                 this.selectedElem.classList.toggle('selected');
             }
         } else {
             this.selectedElem = this.LastListElem;
-            //            this.textOfSelectedLiElem = this.selectedElem.lastChild;
 
             this.selectedElem.classList.toggle('selected');
             this.languageTypeList.scrollTop = 800;
@@ -120,7 +114,6 @@ export class LanguageTypesDOMModel {
                 this.selectedElem.classList.remove('selected');
 
                 this.selectedElem = this.FirstListElem;
-                //                this.textOfSelectedLiElem = this.selectedElem.lastChild;
 
                 this.selectedElem.classList.toggle('selected');
                 this.languageTypeList.scrollTop = 0;
@@ -128,40 +121,34 @@ export class LanguageTypesDOMModel {
                 this.selectedElem.classList.remove('selected');
 
                 this.selectedElem = this.NextElement;
-                //                this.textOfSelectedLiElem = this.selectedElem.lastChild;
 
                 this.selectedElem.classList.toggle('selected');
             }
         } else {
             this.selectedElem = this.FirstListElem;
-            //            this.textOfSelectedLiElem = this.selectedElem.lastChild;
 
             this.selectedElem.classList.toggle('selected');
         }
     }
 
     public handleItemSelectionWithArrowKeys(): void {
-        document.querySelector('body').addEventListener('keydown', (e: KeyboardEvent) => {
+        document.querySelector('body').addEventListener('keydown', (evt: KeyboardEvent) => {
             this.SelectedElem = document.querySelector('.selected') as HTMLLIElement;
 
-            if(e.keyCode === KeyCode.Up) {
-                e.preventDefault();
+            if(evt.keyCode === KeyCode.Up) {
+                evt.preventDefault();
 
                 this.moveUp();
-            } else if(e.keyCode === KeyCode.Down) {
-                e.preventDefault();
+            } else if(evt.keyCode === KeyCode.Down) {
+                evt.preventDefault();
 
                 this.moveDown();
-            }
-
-            if(e.keyCode === KeyCode.Enter) {
-                this.getDataFromSelectedElem(e);
             }
         });
     }
 
     public selectFirstElem(): void {
-        this.inputField.addEventListener('keyup', (e: KeyboardEvent) => {
+        this.inputField.addEventListener('keyup', e => {
             if(e.keyCode !== KeyCode.Down && e.keyCode !== KeyCode.Up) {
                 this.selectedElem = document.querySelector('.selected') as HTMLLIElement;
 
@@ -174,15 +161,7 @@ export class LanguageTypesDOMModel {
                 } else {
                     this.firstListElem && this.firstListElem.classList.remove('selected');
                 }
-
             }
         });
-    }
-
-    public getDataFromSelectedElem(e: KeyboardEvent): void {
-        if(this.selectedElem) {
-            this.inputField.value = '';
-            NbScratchFileViewModel.setExt(this.selectedElem.querySelector('.ext').textContent.replace('(', '').replace(')', ''), this.selectedElem.querySelector('.name').textContent);
-        }
     }
 }

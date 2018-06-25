@@ -2,7 +2,7 @@ import {browser, element, by, promise, WebElementPromise} from 'protractor';
 
 /**
  *
- * @author Chris2011
+ * @author Chrl
  */
 export class HomePagePO {
     private searchField = element(by.id('languageSearch'));

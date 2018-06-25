@@ -1,16 +1,14 @@
 /**
  *
- * @author Chris2011
+ * @author Chrl
  */
-declare const NbScratchFileViewModel: any;
-
 export class LanguageType {
     private icon: string;
     private languageName: string;
     private fileExt: string;
     private isPluginRequired: boolean;
 
-    constructor(languageName: string, fileExt: string, isPluginRequired: boolean) {
+    constructor(languageName: string, fileExt: string, isPluginRequired: boolean = false) {
         this.icon = fileExt || languageName;
         this.languageName = languageName;
         this.fileExt = fileExt || languageName;
@@ -33,11 +31,11 @@ export class LanguageType {
         return this.fileExt.toLowerCase();
     }
 
-    public setExt(languageType: LanguageType): void {
-        NbScratchFileViewModel.setExt(languageType.FileExt, languageType.LanguageName);
+    public get IsPluginRequired(): boolean {
+        return this.isPluginRequired;
     }
 
-    public showPluginRequiredMessage(): string {
-        return this.isPluginRequired ? ' - plugin is required' : '';
+    public setExt(languageType: LanguageType): void {
+        console.log(`Chosen extension - ${languageType.FileExt}`);
     }
 }

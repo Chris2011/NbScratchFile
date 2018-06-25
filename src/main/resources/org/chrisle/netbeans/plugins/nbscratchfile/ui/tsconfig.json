@@ -4,8 +4,13 @@
         "rootDir": "./",
         "outDir": "./dist",
         "sourceMap": true,
+        "strict": false,
         "target": "es6",
         "noUnusedLocals": true,
-        "module": "commonjs"
-    }
+        "module": "commonjs",
+        "experimentalDecorators": true
+    },
+    "include": [
+        "./app/**/*"
+    ]
 }
