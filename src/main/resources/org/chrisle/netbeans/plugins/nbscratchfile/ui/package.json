@@ -1,5 +1,5 @@
 {
-  "name": "NbScratchFile-UI",
+  "name": "Vue-TypeScript-Live-Search-Sample",
   "version": "1.0.0",
   "license": "Apache-2.0",
   "keywords": [
@@ -54,14 +54,14 @@
   },
   "scripts": {
     "build-dev": "npm run test && npm run svg2png && webpack --mode development",
-    "fast-build-dev": "webpack",
     "build-prod": "npm run test && npm run svg2png && webpack --mode production --optimize-minimize",
+    "fast-build-dev": "webpack",
     "svg2png": "svg2png-many -i ./app/icons -o ./.tmp/icons -w 16 -h 16 && node ./build-scripts/gen-sprite.js",
     "sourcemap-explorer": "source-map-explorer ./dist/app.js ./dist/app.js.map",
     "analyze-package": "webpack-bundle-analyzer ./reports/webpack-bundle-analyzer/stats.json",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "serve": "webpack-dev-server",
+    "serve": "npm run svg2png && webpack-dev-server --mode development",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts",
     "ver": "webpack -v"
   }

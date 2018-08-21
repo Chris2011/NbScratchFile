@@ -8,7 +8,8 @@
         "target": "es6",
         "noUnusedLocals": true,
         "module": "commonjs",
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "noEmitOnError": true
     },
     "include": [
         "./app/**/*"

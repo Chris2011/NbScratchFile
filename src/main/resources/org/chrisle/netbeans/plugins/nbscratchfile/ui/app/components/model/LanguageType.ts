@@ -41,7 +41,7 @@ export class LanguageType {
         NbScratchFileViewModel.setExt(languageType.FileExt, languageType.LanguageName);
     }
 
-    public showPluginRequiredMessage(): string {
-        return this.isPluginRequired ? ' - plugin is required' : '';
-    }
+    //    public showPluginRequiredMessage(): string {
+    //        return this.isPluginRequired ? ' - plugin is required' : '';
+    //    }
 }
