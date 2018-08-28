@@ -5,8 +5,8 @@
   ],
   "version": "4.16.5",
   "hash": "558ee36404d770cf7698",
-  "time": 10971,
-  "builtAt": 1534878447529,
+  "time": 8409,
+  "builtAt": 1535100007259,
   "publicPath": "/",
   "outputPath": "C:\\Projekte\\Netbeans Plugins\\NbScratchFile\\src\\main\\resources\\org\\chrisle\\netbeans\\plugins\\nbscratchfile\\ui\\dist",
   "assetsByChunkName": {

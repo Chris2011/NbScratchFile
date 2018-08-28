@@ -62,11 +62,8 @@ module.exports = {
                 from: 'app/index.html',
                 to: 'index.html'
             }, {
-                from: '.tmp/sprite.png',
+                from: 'app/sprite.png',
                 to: 'sprite.png'
-            }, {
-                from: '.tmp/sprite.css',
-                to: 'sprite.css'
             }]),
         new SpriteLoaderPlugin(),
         new BundleAnalyzerPlugin({
