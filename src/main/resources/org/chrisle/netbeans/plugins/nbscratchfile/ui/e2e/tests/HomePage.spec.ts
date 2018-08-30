@@ -14,9 +14,9 @@ describe('home view', () => {
         homePagePO.Url;
     });
 
-    it('title should be Knockout TypeScript Live Search Sample', () => {
+    it('title should be Vue TypeScript Live Search Sample', () => {
         homePagePO.Title.then((title: string) => {
-            expect(title).to.equal('Knockout TypeScript Live Search Sample');
+            expect(title).to.equal('Vue TypeScript Live Search Sample');
         });
     });
 

@@ -1,4 +1,4 @@
-import {LanguageType} from "../app/model/LanguageType";
+import {LanguageType} from "../app/components/model/LanguageType";
 
 // TODO: Create better tests. Up to the user of the template.
 // https://journal.artfuldev.com/write-tests-for-typescript-projects-with-mocha-and-chai-in-typescript-86e053bdb2b6

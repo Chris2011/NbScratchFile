@@ -1,5 +1,5 @@
-# Knockout TypeScript Live Search Sample
-This project sample uses TypeScript 2.*, Knockout, Webpack 3.*, Mocha (+Chai assertion lib), Protractor (with Mocha) and Scss.
+# Vue TypeScript Live Search Sample
+This project sample uses TypeScript 2.*, Vue 2.5, Webpack 4.*, Mocha (+Chai assertion lib), Protractor (with Mocha) and Scss.
 There is no need to install stuff globally, everything works right inside the sample folder.
 
 
@@ -13,10 +13,15 @@ npm i
 The sample uses npm scripts, right inside the package.json
 
 * Start the webserver which builds the app, watches for file changes and does a livereload.
-The URL is http://localhost:9000/generated/, The server creates a temp folder for the built app
-to deliver it to the client (Maybe in memory, I don't know).
+The URL is http://localhost:9000/, The server creates a temp folder (in memory) for the built app
+to deliver it to the client.
 ```
 npm run serve
+```
+
+* Show local webpack version
+```
+npm run ver
 ```
 
 * Create a build for development
@@ -39,15 +44,24 @@ npm run test
 npm run e2e
 ```
 
-* Generate SVG sprite from SVG icons folder (app/icons)
+* Fast build, to test new stuff fast and simple (Will run only webpack)
 ```
-npm run gen-sprite
+npm run fast-build-dev
 ```
 
+* Analyze package sizes
+```
+npm run analyze-package
+```
+
+* Sourcemap explorer
+```
+npm run sourcemap-explorer
+```
+
+* Generate SVG to PNG
+```
+npm run svg2png
+```
 
 So basically thats all you have to do to start coding!
-
-## Known problems
-While using the liveserver for livecoding, atm there is no script to generate the css file from the svg sprite
-with all the classes inside of it to use. Atm it is only possible to see the result with icons in the UI after call
-`npm run build-dev` and call the index.html file from 'dist' in your browser.

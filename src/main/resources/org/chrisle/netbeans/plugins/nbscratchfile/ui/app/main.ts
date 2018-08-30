@@ -1,12 +1,14 @@
-import {App} from "./app";
-import {} from './main.scss';
+import Vue from 'vue';
+import './main.scss';
 
-//import {WebpackRequire} from 'webpack-env';
-//
-//declare var require: WebpackRequire;
-//
-//var files = require.context('./icons', false, /\.svg$/);
-//files.keys().forEach(files);
+import App from './App.vue';
 
-const starter: App = new App();
-starter.main();
+new Vue({
+    el: '#app',
+    render(h) {
+        return h('App');
+    },
+    components: {
+        App
+    }
+});
