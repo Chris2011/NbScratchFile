@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.chrisle.netbeans.plugins</groupId>
     <artifactId>NbScratchFile</artifactId>
-    <version>1.8.0</version>
+    <version>1.8.1-SNAPSHOT</version>
     <packaging>nbm</packaging>
     <name>NbScratchFile</name>
     <description>&lt;h1&gt;Scratch Files for Netbeans (Required JDK 8 &gt; 1.8.0_122 - &lt;a href="https://github.com/Chris2011/NbScratchFile/issues/1#issuecomment-331884374"&gt;#1&lt;/a&gt;)&lt;/h1&gt;
