@@ -22,6 +22,15 @@ module.exports = {
                         url: false
                     }
                 }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        plugins: function() {
+                            return [
+                              require('cssnano')()
+                            ];
+                        }
+                    }
+                }, {
                     loader: 'sass-loader'
                 }]
             }, {
