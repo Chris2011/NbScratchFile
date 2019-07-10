@@ -214,6 +214,11 @@
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-libs-javafx</artifactId>
+            <version>${netbeans.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-api-htmlui</artifactId>
             <version>${netbeans.version}</version>
             <type>jar</type>
@@ -238,10 +243,6 @@
                     <groupId>org.netbeans.external</groupId>
                     <artifactId>net-java-html-json</artifactId>
                 </exclusion>
-<!--                <exclusion>
-                    <groupId>org.netbeans.api</groupId>
-                    <artifactId>org-netbeans-libs-javafx</artifactId>
-                </exclusion>-->
             </exclusions>
         </dependency>
         <dependency>
@@ -252,7 +253,7 @@
         <dependency>
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.boot</artifactId>
-            <version>1.3</version>
+            <version>1.5.1</version>
             <type>jar</type>
         </dependency>
         <dependency>
