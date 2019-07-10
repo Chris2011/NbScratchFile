@@ -42,6 +42,8 @@ public class NbScratchFileViewModel extends BaseWebViewDialogViewModel {
     }
 
     public void setExt(String ext, String languageName) {
+        System.out.println(languageName);
+        
         try {
             Path path = Paths.get(String.format("%s/.netbeans/scratches/%s/scratch%d.%s", System.getProperty("user.home"), languageName, this.counter++, ext));
             Files.createDirectories(path.getParent());

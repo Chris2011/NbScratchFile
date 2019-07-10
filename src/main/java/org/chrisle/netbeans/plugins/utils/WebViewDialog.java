@@ -40,7 +40,7 @@ public class WebViewDialog extends JDialog {
 
     public void init(JComponent jfxPanel) {
         super.add(jfxPanel);
-        super.setSize(550, 436);
+        super.setSize(550, 438);
         super.setResizable(false);
         super.setAlwaysOnTop(true);
         super.setUndecorated(true);
