@@ -240,20 +240,13 @@ export default class LanguageTypeListComponent extends Vue {
             .SelectedElem as LanguageType;
 
         if (selectedElem) {
-            const ext: string | null = selectedElem.FileExt;
+            const languageType: ILanguageType = {
+                LanguageName: selectedElem.LanguageName,
+                FileExt: selectedElem.FileExt,
+            } as ILanguageType;
 
-            if (ext) {
-                const languageExt: string = ext
-                        .replace('(.', '')
-                        .replace(')', ''),
-                    languageType: LanguageType = new LanguageType(
-                        '',
-                        languageExt,
-                    );
-
-                selectedElem.setExt(languageType);
-                this.searchStore.updateSearchTerm('');
-            }
+            selectedElem.setExt(languageType as LanguageType);
+            this.searchStore.updateSearchTerm('');
         }
     }
 }
