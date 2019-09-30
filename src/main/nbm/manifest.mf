@@ -1,4 +1,4 @@
-Manifest-Version: 1.7.1
+Manifest-Version: 2.0.1
 OpenIDE-Module-Display-Category: Tools
 Built-By: Chris2011
 OpenIDE-Module-Install: org/chrisle/netbeans/plugins/nbscratchfile/Installer.class

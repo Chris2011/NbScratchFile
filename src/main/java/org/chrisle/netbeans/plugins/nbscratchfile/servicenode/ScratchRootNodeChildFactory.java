@@ -22,13 +22,59 @@ package org.chrisle.netbeans.plugins.nbscratchfile.servicenode;
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
+import org.openide.filesystems.FileAttributeEvent;
+import org.openide.filesystems.FileChangeListener;
+import org.openide.filesystems.FileEvent;
+import org.openide.filesystems.FileRenameEvent;
+import org.openide.filesystems.FileUtil;
 import org.openide.nodes.AbstractNode;
 import org.openide.nodes.ChildFactory;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
+import org.openide.util.ChangeSupport;
 import org.openide.util.lookup.Lookups;
 
 public class ScratchRootNodeChildFactory extends ChildFactory<File> {
+    private File file;
+//    private final ChangeSupport cs;
+
+//    public ScratchRootNodeChildFactory() {
+//        file = null;
+//        cs = new ChangeSupport(this);
+//
+//        FileUtil.addFileChangeListener(new FileChangeListener() {
+//            @Override
+//            public void fileFolderCreated(FileEvent fe) {
+//                cs.fireChange();
+//            }
+//
+//            @Override
+//            public void fileDataCreated(FileEvent fe) {
+//                cs.fireChange();
+//            }
+//
+//            @Override
+//            public void fileChanged(FileEvent fe) {
+//                cs.fireChange();
+//            }
+//
+//            @Override
+//            public void fileDeleted(FileEvent fe) {
+//                cs.fireChange();
+//            }
+//
+//            @Override
+//            public void fileRenamed(FileRenameEvent fre) {
+//                cs.fireChange();
+//            }
+//
+//            @Override
+//            public void fileAttributeChanged(FileAttributeEvent fae) {
+//                cs.fireChange();
+//            }
+//        }, file);
+//    }
+
     @Override
     protected boolean createKeys(List<File> scratchDirs) {
         File[] directories = new File(String.format("%s/.netbeans/scratches", System.getProperty("user.home"))).listFiles((File pathname) -> pathname.isDirectory());
@@ -40,6 +86,8 @@ public class ScratchRootNodeChildFactory extends ChildFactory<File> {
 
     @Override
     protected Node createNodeForKey(File key) {
+        file = key;
+
         AbstractNode result = new AbstractNode(Children.create(new ScratchFileNodeChildFactory(key), true), Lookups.singleton(key));
 
         result.setDisplayName(key.getName());
