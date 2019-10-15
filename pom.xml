@@ -131,28 +131,10 @@
                     </archive>
                 </configuration>
             </plugin>
-<!--            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.4</version>
-                <executions>
-                    <execution>
-                        <id>distro-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                        <configuration>
-                            <descriptors>
-                                <descriptor>src/main/assembly/javafx.xml</descriptor>
-                            </descriptors>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>-->
             <plugin>
                 <groupId>org.netbeans.html</groupId>
                 <artifactId>html4j-maven-plugin</artifactId>
-                <version>1.6.1</version>
+                <version>${netbeans.html.version}</version>
                 <executions>
                     <execution>
                         <goals>
@@ -217,25 +199,39 @@
             <version>${netbeans.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.netbeans.html</groupId>
-            <artifactId>net.java.html</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.html</groupId>
-            <artifactId>net.java.html.boot</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.html</groupId>
-            <artifactId>net.java.html.boot.fx</artifactId>
-            <version>1.6.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-api-htmlui</artifactId>
             <version>${netbeans.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-boot-fx</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-json</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-boot</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>org-netbeans-html-ko4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>org-netbeans-html-xhr4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.netbeans.external</groupId>
+                    <artifactId>net-java-html-geo</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.netbeans.modules</groupId>
@@ -270,6 +266,33 @@
             <artifactId>org-netbeans-api-templates</artifactId>
             <version>${netbeans.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.netbeans.html</groupId>
+            <artifactId>net.java.html</artifactId>
+            <version>${netbeans.html.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.html</groupId>
+            <artifactId>net.java.html.json</artifactId>
+            <version>${netbeans.html.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.html</groupId>
+            <artifactId>net.java.html.boot</artifactId>
+            <version>${netbeans.html.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.html</groupId>
+            <artifactId>ko4j</artifactId>
+            <version>${netbeans.html.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.html</groupId>
+            <artifactId>net.java.html.boot.fx</artifactId>
+            <version>${netbeans.html.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
     <properties>
         <project.author>Chris2011</project.author>
@@ -278,6 +301,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <netbeans.compile.on.save>all</netbeans.compile.on.save>
         <netbeans.version>RELEASE110</netbeans.version>
+        <netbeans.html.version>1.6.1</netbeans.html.version>
     </properties>
     <description>&lt;p&gt;See the &lt;a href="https://github.com/Chris2011/NbScratchFile/blob/master/Changelog.md"&gt;changelog&lt;/a&gt; for all changes and the &lt;a href="https://github.com/Chris2011/NbScratchFile/blob/master/Readme.md"&gt;readme&lt;/a&gt; for all information.&lt;/p&gt;</description>
 </project>
