@@ -50,7 +50,7 @@
                     <skipIfExist>true</skipIfExist>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--            <plugin>
                 <groupId>com.github.eirslett</groupId>
                 <artifactId>frontend-maven-plugin</artifactId>
                 <version>1.7.6</version>
@@ -82,7 +82,7 @@
                     <yarnVersion>v1.16.0</yarnVersion>
                     <workingDirectory>src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui</workingDirectory>
                 </configuration>
-            </plugin>
+            </plugin>-->
             <plugin>
                 <groupId>org.apache.netbeans.utilities</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
@@ -104,31 +104,17 @@
                 <version>2.3.2</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <debug>true</debug>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
-                <executions>
-                    <execution>
-                        <id>jar</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                        <phase>prepare-package</phase>
-                    </execution>
-                </executions>
                 <configuration>
                     <!-- to have the jar plugin pickup the nbm generated manifest -->
                     <useDefaultManifestFile>true</useDefaultManifestFile>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <useUniqueVersions>false</useUniqueVersions>
-                        </manifest>
-                    </archive>
+                    <verifyRuntime>skip</verifyRuntime>
                 </configuration>
             </plugin>
             <plugin>
@@ -146,17 +132,29 @@
             </plugin>
         </plugins>
     </build>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>4.3</id>
-            <url>https://repository.apache.org/content/repositories/orgapachenetbeans-1043/</url>
-        </pluginRepository>
-    </pluginRepositories>
     <dependencies>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-web</artifactId>
-            <version>11</version>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-netbeans-libs-javafx</artifactId>
+            <version>${netbeans.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-libs-javafx-win</artifactId>
+            <version>${netbeans.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-libs-javafx-linux</artifactId>
+            <version>${netbeans.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.modules</groupId>
+            <artifactId>org-netbeans-libs-javafx-macosx</artifactId>
+            <version>${netbeans.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -219,37 +217,7 @@
                     <groupId>org.netbeans.external</groupId>
                     <artifactId>net-java-html-boot</artifactId>
                 </exclusion>
-                <exclusion>
-                    <groupId>org.netbeans.external</groupId>
-                    <artifactId>org-netbeans-html-ko4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.netbeans.external</groupId>
-                    <artifactId>org-netbeans-html-xhr4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.netbeans.external</groupId>
-                    <artifactId>net-java-html-geo</artifactId>
-                </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.modules</groupId>
-            <artifactId>org-netbeans-libs-javafx-win</artifactId>
-            <version>${netbeans.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.modules</groupId>
-            <artifactId>org-netbeans-libs-javafx-macosx</artifactId>
-            <version>${netbeans.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.modules</groupId>
-            <artifactId>org-netbeans-libs-javafx-linux</artifactId>
-            <version>${netbeans.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -259,11 +227,6 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-text</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-api-templates</artifactId>
             <version>${netbeans.version}</version>
         </dependency>
         <dependency>
@@ -280,12 +243,6 @@
             <groupId>org.netbeans.html</groupId>
             <artifactId>net.java.html.boot</artifactId>
             <version>${netbeans.html.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.html</groupId>
-            <artifactId>ko4j</artifactId>
-            <version>${netbeans.html.version}</version>
-            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.netbeans.html</groupId>
