@@ -1,0 +1,7 @@
+Manifest-Version: 2.0.1
+OpenIDE-Module-Display-Category: Tools
+Built-By: Chris2011
+OpenIDE-Module-Install: org/chrisle/netbeans/plugins/nbscratchfile/Installer.class
+OpenIDE-Module-Fragment-Host: org.netbeans.libs.javafx
+OpenIDE-Module-Provides: org.openide.modules.jre.JavaFX
+OpenIDE-Module-Module-Dependencies: org.netbeans.libs.javafx > 2.11.1
