@@ -17,6 +17,9 @@ package org.chrisle.netbeans.plugins.utils;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.GraphicsDevice;
+import static java.awt.GraphicsDevice.WindowTranslucency.PERPIXEL_TRANSLUCENT;
+import java.awt.GraphicsEnvironment;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -39,6 +42,9 @@ public class WebViewDialog extends JDialog {
     private static final long serialVersionUID = 5885621373197292877L;
 
     public void init(JComponent jfxPanel) {
+        GraphicsEnvironment graphicsEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        GraphicsDevice graphicsDevice = graphicsEnvironment.getDefaultScreenDevice();
+
         super.add(jfxPanel);
         super.setSize(550, 436);
         super.setResizable(false);
@@ -46,7 +52,9 @@ public class WebViewDialog extends JDialog {
         super.setUndecorated(true);
         super.getRootPane().setOpaque(false);
         super.getContentPane().setBackground(new Color(0, 0, 0, 0));
-        super.setBackground(new Color(0, 0, 0, 0));
+        if (graphicsDevice.isWindowTranslucencySupported(PERPIXEL_TRANSLUCENT)) {
+            super.setBackground(new Color(0, 0, 0, 0));
+        }
 
         super.addWindowFocusListener(new WindowFocusListener() {
             @Override
