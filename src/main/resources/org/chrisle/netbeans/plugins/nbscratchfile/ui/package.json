@@ -50,7 +50,7 @@
     "webpack": "^4.12.1",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "^3.1.11"
   },
   "scripts": {
     "build-dev": "npm run test && npm run svg2png && webpack --mode development",
