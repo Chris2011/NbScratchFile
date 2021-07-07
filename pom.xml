@@ -105,8 +105,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <nodeVersion>v10.5.0</nodeVersion>
-                    <yarnVersion>v1.7.0</yarnVersion>
+                    <nodeVersion>v14.16.1</nodeVersion>
+                    <yarnVersion>v1.22.5</yarnVersion>
                     <workingDirectory>src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui</workingDirectory>
                 </configuration>
             </plugin>
@@ -170,21 +170,8 @@
     <repositories>
         <repository>
             <id>netbeans</id>
-            <name>Repository hosting NetBeans modules</name>
-            <url>http://bits.netbeans.org/nexus/content/groups/netbeans</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>central</id>
-            <url>http://repo1.maven.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <name>NetBeans</name>
+            <url>http://netbeans.apidesign.org/maven2/</url>
         </repository>
     </repositories>
     <dependencies>

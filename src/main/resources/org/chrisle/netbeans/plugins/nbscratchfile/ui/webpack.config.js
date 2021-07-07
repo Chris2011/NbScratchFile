@@ -22,6 +22,17 @@ module.exports = {
                         url: false
                     }
                 }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        postcssOptions: {
+                            plugins: [function() {
+                                return [
+                                  require('cssnano')()
+                                ];
+                            }]
+                        }
+                    }
+                }, {
                     loader: 'sass-loader'
                 }]
             }, {
@@ -58,13 +69,13 @@ module.exports = {
     },
     devtool: 'source-map',
     plugins: [
-        new CopyWebpackPlugin([{
+        new CopyWebpackPlugin({patterns: [{
                 from: 'app/index.html',
                 to: 'index.html'
             }, {
                 from: 'app/sprite.png',
                 to: 'sprite.png'
-            }]),
+            }]}),
         new SpriteLoaderPlugin(),
         new BundleAnalyzerPlugin({
             generateStatsFile: true,
