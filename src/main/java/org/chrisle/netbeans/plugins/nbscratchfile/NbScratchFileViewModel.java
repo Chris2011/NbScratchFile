@@ -20,30 +20,21 @@ import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import org.chrisle.netbeans.plugins.utils.BaseWebViewDialogViewModel;
 import org.netbeans.api.actions.Openable;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
 import org.openide.loaders.DataObject;
-import org.openide.util.Exceptions;
 
 /**
  *
- * @author Chris2011
+ * @author Chrizzly
  */
-public class NbScratchFileViewModel extends BaseWebViewDialogViewModel {
-    private int counter = 1;
-    private final JDialog dialog;
+public class NbScratchFileViewModel {
+    private static int counter = 1;
 
-    public NbScratchFileViewModel(JDialog dialog) {
-        this.dialog = dialog;
-    }
-
-    public void setExt(String ext, String languageName) {
+    public static void setExt(String ext, String languageName) {
         try {
-            Path path = Paths.get(String.format("%s/.netbeans/scratches/%s/scratch%d.%s", System.getProperty("user.home"), languageName, this.counter++, ext));
+            Path path = Paths.get(String.format("%s/.netbeans/scratches/%s/scratch%d.%s", System.getProperty("user.home"), languageName, NbScratchFileViewModel.counter, ext));
             Files.createDirectories(path.getParent());
             Files.createFile(path);
 
@@ -51,14 +42,14 @@ public class NbScratchFileViewModel extends BaseWebViewDialogViewModel {
             DataObject dataObject = DataObject.find(fo);
             Openable openable = dataObject.getLookup().lookup(Openable.class);
 
-            dialog.setVisible(false);
             openable.open();
+            NbScratchFileViewModel.counter = 1;
         } catch (FileAlreadyExistsException e) {
-            this.setExt(ext, languageName);
+            NbScratchFileViewModel.counter++;
+            NbScratchFileViewModel.setExt(ext, languageName);
             System.err.println("already exists: " + e.getMessage());
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage());
-            Exceptions.printStackTrace(ex);
+            ex.printStackTrace();
         }
     }
 }
