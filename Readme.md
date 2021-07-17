@@ -1,15 +1,13 @@
-# NbScratchFile - Scratch files for Netbeans
+# NbScratchFile
+
 ![License](https://img.shields.io/github/license/Chris2011/NbScratchFile.svg)
 ![Release](https://img.shields.io/github/release/Chris2011/NbScratchFile.svg)
-![Contributors](https://img.shields.io/github/contributors/Chris2011/NbScratchFile.svg)
-![Downloads](https://img.shields.io/github/downloads/Chris2011/NbScratchFile/total.svg)
-
-
-## Hint
-(Required JDK 8 > 1.8.0_122 - <a href="https://github.com/Chris2011/NbScratchFile/issues/1#issuecomment-331884374">#1</a>) <a href="https://travis-ci.org/Chris2011/NbScratchFile"><img src="https://travis-ci.org/Chris2011/NbScratchFile.svg?branch=develop" /></a>
+![Contributors](https://img.shields.io/github/contributors/chris2011/NbScratchFile.svg)
+![Downloads](https://img.shields.io/github/downloads/chris2011/NbScratchFile/total.svg)
 
 
 ## Description
+
 With this plugin you can create scratch files which will be saved on disk. You don't need a project for this. After typing `Ctrl + Alt + Shift + N` you can choose a language and the file will be saved to your user dir: `/userDir/.netbeans/scratches`
 
 The idea came up while using Sublime Text 2, where you can type `Ctrl + N` to creates an empty file.
@@ -22,6 +20,7 @@ save the file to your user `/userDir/.netbeans/scratches`. You can see all the s
 
 
 ## Screenshots
+
 ### `File -> New Scratch File` or `Ctrl + Alt + Shift + N`
 ![Alt text](/screenshots/NbScratchFile.jpg?raw=true)
 
@@ -35,7 +34,12 @@ save the file to your user `/userDir/.netbeans/scratches`. You can see all the s
 
 
 ## Changelog
-See [Changelog](./Changelog.md) for all information 
+
+See [Changelog](./Changelog.md) for all information  
 
 
-Plugin is available at http://plugins.netbeans.org/plugin/58020/nbscratchfile
+## NetBeans Compatibility
+
+Version >= 2.0.0 is compatible to Apache NetBeans >= 9.0  
+
+Plugin is available at https://github.com/Chris2011/NbScratchFile/releases/tag/2.0.0

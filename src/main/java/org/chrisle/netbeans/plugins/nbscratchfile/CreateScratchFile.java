@@ -17,7 +17,8 @@ package org.chrisle.netbeans.plugins.nbscratchfile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.chrisle.netbeans.plugins.utils.WebViewDialog;
+import javax.swing.JFrame;
+import org.chrisle.netbeans.plugins.nbscratchfile.ui.FilterableFileTypeDialog;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
@@ -42,12 +43,7 @@ import org.openide.util.NbBundle.Messages;
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
-    private static WebViewDialog _dialog;
-    public static final String viewPath = "/org/chrisle/netbeans/plugins/nbscratchfile/ui/dist/index.html";
-
-    public static void setDialog(WebViewDialog dialog) {
-        _dialog = dialog;
-    }
+    private final FilterableFileTypeDialog _dialog = new FilterableFileTypeDialog(new JFrame(), false);
 
     @Override
     public void actionPerformed(ActionEvent e) {

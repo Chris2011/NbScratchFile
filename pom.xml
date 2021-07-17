@@ -1,28 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.chrisle.netbeans.plugins</groupId>
     <artifactId>NbScratchFile</artifactId>
-    <version>2.0.1-SNAPSHOT</version>
+    <version>2.1.0-SNAPSHOT</version>
     <packaging>nbm</packaging>
     <name>NbScratchFile</name>
+    <description>Scratch Files for Netbeans</description>
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <exclude>**/ui/.projectKnowledge/**</exclude>
-                    <exclude>**/ui/app/**</exclude>
-                    <exclude>**/ui/build-scripts/**</exclude>
-                    <exclude>**/ui/e2e/**</exclude>
-                    <exclude>**/ui/nbproject/**</exclude>
-                    <exclude>**/ui/tests/**</exclude>
-                    <exclude>**/ui/node_modules/**</exclude>
-                    <exclude>**/ui/node/**</exclude>
-                    <exclude>**/ui/.tmp/**</exclude>
-                </excludes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -50,43 +37,10 @@
                     <skipIfExist>true</skipIfExist>
                 </configuration>
             </plugin>
-            <!--            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>1.7.6</version>
-                <executions>
-                    <execution>
-                        <id>install node and yarn</id>
-                        <goals>
-                            <goal>install-node-and-yarn</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>yarn install</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>yarn run build-prod</id>
-                        <goals>
-                            <goal>yarn</goal>
-                        </goals>
-                        <configuration>
-                            <arguments>run build-prod</arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-                <configuration>
-                    <nodeVersion>v10.16.0</nodeVersion>
-                    <yarnVersion>v1.16.0</yarnVersion>
-                    <workingDirectory>src/main/resources/org/chrisle/netbeans/plugins/nbscratchfile/ui</workingDirectory>
-                </configuration>
-            </plugin>-->
             <plugin>
-                <groupId>org.apache.netbeans.utilities</groupId>
+                <groupId>org.codehaus.mojo</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
-                <version>4.3</version>
+                <version>4.1</version>
                 <extensions>true</extensions>
                 <configuration>
                     <author>${project.author}</author>
@@ -104,7 +58,15 @@
                 <version>2.3.2</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                    <debug>true</debug>
+                    <showDeprecation>false</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
             <plugin>
@@ -117,86 +79,59 @@
                     <verifyRuntime>skip</verifyRuntime>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.netbeans.html</groupId>
-                <artifactId>html4j-maven-plugin</artifactId>
-                <version>${netbeans.html.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>process-js-annotations</goal>
-                        </goals>
-                        <phase>process-classes</phase>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>netbeans</id>
+            <name>NetBeans</name>
+            <url>http://netbeans.apidesign.org/maven2/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-awt</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-nodes</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-netbeans-core-ide</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-loaders</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-filesystems</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util-lookup</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-netbeans-api-htmlui</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-modules</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-text</artifactId>
-            <version>${netbeans.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.html</groupId>
-            <artifactId>net.java.html</artifactId>
-            <version>${netbeans.html.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.html</groupId>
-            <artifactId>net.java.html.boot</artifactId>
-            <version>${netbeans.html.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.netbeans.api</groupId>
-            <artifactId>org-openide-util-ui</artifactId>
-            <version>${netbeans.version}</version>
+            <version>${netbeans-release}</version>
         </dependency>
     </dependencies>
     <properties>
@@ -204,9 +139,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <netbeans.compile.on.save>all</netbeans.compile.on.save>
-        <netbeans.version>RELEASE110</netbeans.version>
-        <netbeans.html.version>1.6.1</netbeans.html.version>
+        <netbeans-release>RELEASE90</netbeans-release>
     </properties>
-    <description>&lt;p&gt;See the &lt;a href="https://github.com/Chris2011/NbScratchFile/blob/master/Changelog.md"&gt;changelog&lt;/a&gt; for all changes and the &lt;a href="https://github.com/Chris2011/NbScratchFile/blob/master/Readme.md"&gt;readme&lt;/a&gt; for all information.&lt;/p&gt;</description>
 </project>

@@ -1,9 +1,3 @@
-Manifest-Version: 2.0.1
-OpenIDE-Module: org.chrisle.netbeans.plugins.nbscratchfile
+Manifest-Version: 1.7.1
 OpenIDE-Module-Display-Category: Tools
 Built-By: Chris2011
-OpenIDE-Module-Install: org/chrisle/netbeans/plugins/nbscratchfile/Installer.class
-OpenIDE-Module-IDE-Dependencies: org.netbeans.api.htmlui
-OpenIDE-Module-Requires: org.netbeans.api.htmlui
-OpenIDE-Module-Module-Dependencies: org.netbeans.api.htmlui
-XXXOpenIDE-Module-Needs: org.netbeans.api.htmlui
