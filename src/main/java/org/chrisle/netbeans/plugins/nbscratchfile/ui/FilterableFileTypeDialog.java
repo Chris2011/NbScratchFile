@@ -24,6 +24,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.IOException;
@@ -91,6 +92,22 @@ public class FilterableFileTypeDialog extends javax.swing.JDialog {
                 int index = list.locationToIndex(e.getPoint());
 
                 list.setSelectedIndex(index);
+            }
+        });
+
+        languagesList.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                JList list = (JList) e.getSource();
+                int index = list.locationToIndex(e.getPoint());
+
+                if (index != -1) {
+                    list.setSelectedIndex(index);
+                }
             }
         });
 
