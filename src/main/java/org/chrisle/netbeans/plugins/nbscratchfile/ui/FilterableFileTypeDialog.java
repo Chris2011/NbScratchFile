@@ -17,6 +17,7 @@ package org.chrisle.netbeans.plugins.nbscratchfile.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
@@ -125,13 +126,12 @@ public class FilterableFileTypeDialog extends javax.swing.JDialog {
         super.addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowGainedFocus(WindowEvent e) {
-                searchField.setFocusable(true);
+                searchField.requestFocusInWindow();
             }
 
             @Override
             public void windowLostFocus(WindowEvent e) {
-                FilterableFileTypeDialog.this.setVisible(false);
-                searchField.setText("");
+                EventQueue.invokeLater(FilterableFileTypeDialog.this::closeIfFocusRemainsLost);
             }
         });
 
@@ -154,6 +154,15 @@ public class FilterableFileTypeDialog extends javax.swing.JDialog {
 
         super.setLocationRelativeTo(focusOwner);
         super.setVisible(true);
+    }
+
+    private void closeIfFocusRemainsLost() {
+        KeyboardFocusManager focusManager = KeyboardFocusManager.getCurrentKeyboardFocusManager();
+
+        if (isVisible() && !isFocused() && focusManager.getActiveWindow() != this) {
+            super.setVisible(false);
+            searchField.setText("");
+        }
     }
 
     private static boolean languagesFilter(LanguageType lang, String str) {
