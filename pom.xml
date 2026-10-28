@@ -109,7 +109,7 @@
         <repository>
             <id>netbeans</id>
             <name>NetBeans</name>
-            <url>http://netbeans.apidesign.org/maven2/</url>
+            <url>https://netbeans.apidesign.org/maven2/</url>
         </repository>
     </repositories>
     <dependencies>
@@ -150,6 +150,11 @@
         <dependency>
             <groupId>org.netbeans.api</groupId>
             <artifactId>org-openide-util-lookup</artifactId>
+            <version>RELEASE82</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-windows</artifactId>
             <version>RELEASE82</version>
         </dependency>
         <dependency>

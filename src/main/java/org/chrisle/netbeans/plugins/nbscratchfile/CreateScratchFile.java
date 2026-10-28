@@ -17,13 +17,13 @@ package org.chrisle.netbeans.plugins.nbscratchfile;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 import org.chrisle.netbeans.plugins.nbscratchfile.ui.FilterableFileTypeDialog;
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
 import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.util.NbBundle.Messages;
+import org.openide.windows.WindowManager;
 
 /**
  *
@@ -43,10 +43,14 @@ import org.openide.util.NbBundle.Messages;
 })
 @Messages("CTL_CreateScratchFile=New Scratch File...")
 public final class CreateScratchFile implements ActionListener {
-    private final FilterableFileTypeDialog _dialog = new FilterableFileTypeDialog(new JFrame(), false);
+    private FilterableFileTypeDialog dialog;
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        _dialog.showDialog();
+        if (dialog == null) {
+            dialog = new FilterableFileTypeDialog(WindowManager.getDefault().getMainWindow(), false);
+        }
+
+        dialog.showDialog();
     }
 }
